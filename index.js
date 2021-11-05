@@ -4,6 +4,7 @@ const io = require('@actions/io')
 const os = require('os')
 const tc = require('@actions/tool-cache')
 const mv = require('mv')
+const gunzip = require('gunzip-file')
 
 const DEFAULT_BRANCH = 'masterV1.0'
 const DEFAULT_SOURCE = 'dalehenrich/superDoit'
@@ -30,8 +31,7 @@ async function run() {
     console.log('Downloading and extracting extent0.solo.dbf...')
     let soloTempDir = path.join(os.homedir(), '.solodbf-temp')
     const soloToolPath = await tc.downloadTool(`https://github.com/dalehenrich/superDoit/releases/download/v0.1.0/${version}_extent0.solo.dbf.gz`)
-		console.log("soloToolPath: , ${soloToolPath}")
-    soloTempDir = await tc.extractZip(soloToolPath, soloTempDir)
+    soloTempDir = await gunzip.gunzip(soloToolPath, soloTempDir)
     await mv(path.join(soloTempDir, `superDoit-${superDoitBranch}`), GEMSTONE_DIRECTORY)
 
     /* Set up superDoit command. */

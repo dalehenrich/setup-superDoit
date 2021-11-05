@@ -5337,6 +5337,52 @@ var isArray = Array.isArray || function (xs) {
 
 /***/ }),
 
+/***/ 1959:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+var fs = __nccwpck_require__(5747);
+var zlib = __nccwpck_require__(8761);
+
+// checks whether a file exists
+function fileExists(filePath) {
+    try {
+        return fs.statSync(filePath).isFile();
+    } catch (err) {
+        return false;
+    }
+}
+
+var gunzipFile = function(source, destination, callback) {
+	// check if source file exists
+	if ( !fileExists(source) ) {
+		return false;
+	}
+
+	try {
+		// prepare streams
+		var src = fs.createReadStream(source);
+		var dest = fs.createWriteStream(destination);
+
+		// extract the archive
+		src.pipe(zlib.createGunzip()).pipe(dest);
+
+		// callback on extract completion
+		dest.on('close', function() {
+			if ( typeof callback === 'function' ) {
+				callback();
+			}
+		});
+	} catch (err) {
+		// either source is not readable
+		// or the destination is not writable
+		// or file not a gzip
+	}
+}
+
+module.exports = gunzipFile;
+
+/***/ }),
+
 /***/ 2492:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
@@ -9275,6 +9321,14 @@ module.exports = require("tls");
 "use strict";
 module.exports = require("util");
 
+/***/ }),
+
+/***/ 8761:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("zlib");
+
 /***/ })
 
 /******/ 	});
@@ -9324,6 +9378,7 @@ const io = __nccwpck_require__(7436)
 const os = __nccwpck_require__(2087)
 const tc = __nccwpck_require__(7784)
 const mv = __nccwpck_require__(6371)
+const gunzip = __nccwpck_require__(1959)
 
 const DEFAULT_BRANCH = 'masterV1.0'
 const DEFAULT_SOURCE = 'dalehenrich/superDoit'
@@ -9350,8 +9405,7 @@ async function run() {
     console.log('Downloading and extracting extent0.solo.dbf...')
     let soloTempDir = path.join(os.homedir(), '.solodbf-temp')
     const soloToolPath = await tc.downloadTool(`https://github.com/dalehenrich/superDoit/releases/download/v0.1.0/${version}_extent0.solo.dbf.gz`)
-		console.log("soloToolPath: , ${soloToolPath}")
-    soloTempDir = await tc.extractZip(soloToolPath, soloTempDir)
+    soloTempDir = await gunzip.gunzip(soloToolPath, soloTempDir)
     await mv(path.join(soloTempDir, `superDoit-${superDoitBranch}`), GEMSTONE_DIRECTORY)
 
     /* Set up superDoit command. */
