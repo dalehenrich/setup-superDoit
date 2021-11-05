@@ -13,13 +13,14 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ macos-latest, ubuntu-latest ]
+        os: [ ubuntu-latest ]
     steps:
     - uses: actions/checkout@master
     - uses: dalehenrich/setup-superDoit@main
       with:
         gemstone-version: '3.6.0'
         superDoit-branch: 'issue_21'
+    - shell: bash
     - run: |
         which superdoit_solo
         which superdoit_stone
