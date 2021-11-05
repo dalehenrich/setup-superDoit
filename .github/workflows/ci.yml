@@ -21,5 +21,7 @@ jobs:
         gemstone-version: '3.6.0'
         superDoit-branch: 'issue_21'
     - run: |
+        which superdoit_solo
+        which superdoit_stone
         examples/simple/simple.solo -h
 
