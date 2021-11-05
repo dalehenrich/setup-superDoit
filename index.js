@@ -1,8 +1,8 @@
 const core = require('@actions/core');
-const tc = require('@actions/tool-cache')
 const path = require('path')
 const io = require('@actions/io')
 const os = require('os')
+const tc = require('@actions/tool-cache')
 
 const DEFAULT_BRANCH = 'masterV1.0'
 const DEFAULT_SOURCE = 'dalehenrich/superDoit'
