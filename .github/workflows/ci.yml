@@ -23,5 +23,6 @@ jobs:
     - run: |
         which superdoit_solo
         which superdoit_stone
+        which simple.solo
         examples/simple/simple.solo -h
 
