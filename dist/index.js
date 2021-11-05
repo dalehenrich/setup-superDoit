@@ -9406,7 +9406,7 @@ async function run() {
     let soloTempDir = path.join(os.homedir(), '.solodbf-temp')
     const soloToolPath = await tc.downloadTool(`https://github.com/dalehenrich/superDoit/releases/download/v0.1.0/${version}_extent0.solo.dbf.gz`)
 			console.log('[1]')
-		console.log( path.format(soloToolPath))
+		console.log(soloToolPath)
 			console.log('[2]')
 		console.log( path.format(soloTempDir))
 			console.log('[3]')
