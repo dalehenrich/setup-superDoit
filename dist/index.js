@@ -9412,7 +9412,7 @@ async function run() {
 			console.log('[3]')
     soloTempDir = await gunzip( soloToolPath, soloTempDir)
 			console.log('[4]')
-
+		console.log( soloTempDir)
 			console.log('[5]')
     await mv(path.join(soloTempDir, `superDoit-${superDoitBranch}`), GEMSTONE_DIRECTORY, console.error(err))
 			console.log('[6]')
