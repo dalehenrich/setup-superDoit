@@ -39,8 +39,10 @@ async function run() {
     await gunzip( soloToolPath, soloTempDir)
 			console.log('[4]')
 		console.log( soloTempDir)
+		console.log( GEMSTONE_DIRECTORY)
+		console.log( path.join(soloTempDir, 'superDoit-${superDoitBranch}'))
 			console.log('[5]')
-    await mv(path.join(soloTempDir, `superDoit-${superDoitBranch}`), GEMSTONE_DIRECTORY)
+    await mv(path.join(soloTempDir, 'superDoit-${superDoitBranch}'), GEMSTONE_DIRECTORY)
 			console.log('[6]')
 
     /* Set up superDoit command. */
