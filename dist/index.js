@@ -9408,10 +9408,12 @@ async function run() {
 			console.log('[1]')
 		console.log(soloToolPath)
 			console.log('[2]')
-		console.log( path.format(soloTempDir))
+		console.log( soloTempDir)
 			console.log('[3]')
-    soloTempDir = await gunzip( path.format(soloToolPath), path.format(soloTempDir))
+    soloTempDir = await gunzip( soloToolPath, soloTempDir)
+			console.log('[4]')
     await mv(path.join(soloTempDir, `superDoit-${superDoitBranch}`), GEMSTONE_DIRECTORY)
+			console.log('[5]')
 
     /* Set up superDoit command. */
     core.addPath(path.join(INSTALLATION_DIRECTORY, 'bin'))
