@@ -9341,14 +9341,15 @@ async function run() {
     const superDoitSource = core.getInput('smalltalkCI-source') || DEFAULT_SOURCE
 
     /* Download and extract superDoit. */
-    console.log('Downloading and extractingsuperDoit...')
+    console.log('Downloading and extracting superDoit...')
     let tempDir = path.join(os.homedir(), '.superDoit-temp')
     const toolPath = await tc.downloadTool(`https://github.com/${superDoitSource}/archive/${superDoitBranch}.tar.gz`)
     tempDir = await tc.extractTar(toolPath, tempDir)
     await io.mv(path.join(tempDir, `superDoit-${superDoitBranch}`), INSTALLATION_DIRECTORY)
 
+    console.log('Downloading and extracting extene0.solo.dbf...')
     let soloTempDir = path.join(os.homedir(), '.solodbf-temp')
-    const soloToolPath = await tc.downloadTool(`https://github.com/dalehenrich/superDoit/releases/download/v0.1.0/${version}_extent0.solo.dbf.gz"`)
+    const soloToolPath = await tc.downloadTool(`https://github.com/dalehenrich/superDoit/releases/download/v0.1.0/${version}_extent0.solo.dbf.gz`)
     soloTempDir = await tc.extractZip(soloToolPath, soloTempDir)
     await mv(path.join(soloTempDir, `superDoit-${superDoitBranch}`), GEMSTONE_DIRECTORY)
 
