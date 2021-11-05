@@ -1,19 +1,37 @@
 const core = require('@actions/core');
-const wait = require('./wait');
+const tc = require('@actions/tool-cache')
+const path = require('path')
+const io = require('@actions/io')
+const os = require('os')
 
+const DEFAULT_BRANCH = 'masterV1.0'
+const DEFAULT_SOURCE = 'dalehenrich/superDoit'
 
-// most @actions toolkit packages have async methods
+const INSTALLATION_DIRECTORY = path.join(os.homedir(), '.superDoit')
+
 async function run() {
   try {
-    const ms = core.getInput('milliseconds');
-    core.info(`Waiting ${ms} milliseconds ...`);
+		const version = core.getInput('gemstone-version', { required: true })
 
-    core.debug((new Date()).toTimeString()); // debug is only output if you set the secret `ACTIONS_RUNNER_DEBUG` to true
-    await wait(parseInt(ms));
-    core.info((new Date()).toTimeString());
+		core.setOutput('gemstone-version', version)
 
-    core.setOutput('time', new Date().toTimeString());
-  } catch (error) {
+    const superDoitBranch = core.getInput('smalltalkCI-branch') || DEFAULT_BRANCH
+    const superDoitSource = core.getInput('smalltalkCI-source') || DEFAULT_SOURCE
+
+    /* Download and extract superDoit. */
+    console.log('Downloading and extractingsuperDoit...')
+    let tempDir = path.join(os.homedir(), '.superDoit-temp')
+    const toolPath = await tc.downloadTool(`https://github.com/${superDoitSource}/archive/${superDoitBranch}.tar.gz`)
+    tempDir = await tc.extractTar(toolPath, tempDir)
+    await io.mv(path.join(tempDir, `superDoit-${superDoitBranch}`), INSTALLATION_DIRECTORY)
+
+    /* Set up superDoit command. */
+    core.addPath(path.join(INSTALLATION_DIRECTORY, 'bin'))
+
+    /* Set up superDoit examples --- TESTING */
+    core.addPath(path.join(INSTALLATION_DIRECTORY, 'examples/simple'))
+
+	} catch (error) {
     core.setFailed(error.message);
   }
 }

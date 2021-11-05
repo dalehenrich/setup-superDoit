@@ -1555,19 +1555,18 @@ exports.debug = debug; // for test
 
 /***/ }),
 
-/***/ 258:
+/***/ 27:
 /***/ ((module) => {
 
-let wait = function (milliseconds) {
-  return new Promise((resolve) => {
-    if (typeof milliseconds !== 'number') {
-      throw new Error('milliseconds not a number');
-    }
-    setTimeout(() => resolve("done!"), milliseconds)
-  });
-};
+module.exports = eval("require")("@actions/io");
 
-module.exports = wait;
+
+/***/ }),
+
+/***/ 617:
+/***/ ((module) => {
+
+module.exports = eval("require")("@actions/tool-cache");
 
 
 /***/ }),
@@ -1694,21 +1693,39 @@ var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
 const core = __nccwpck_require__(186);
-const wait = __nccwpck_require__(258);
+const tc = __nccwpck_require__(617)
+const path = __nccwpck_require__(622)
+const io = __nccwpck_require__(27)
+const os = __nccwpck_require__(87)
 
+const DEFAULT_BRANCH = 'masterV1.0'
+const DEFAULT_SOURCE = 'dalehenrich/superDoit'
 
-// most @actions toolkit packages have async methods
+const INSTALLATION_DIRECTORY = path.join(os.homedir(), '.superDoit')
+
 async function run() {
   try {
-    const ms = core.getInput('milliseconds');
-    core.info(`Waiting ${ms} milliseconds ...`);
+		const version = core.getInput('gemstone-version', { required: true })
 
-    core.debug((new Date()).toTimeString()); // debug is only output if you set the secret `ACTIONS_RUNNER_DEBUG` to true
-    await wait(parseInt(ms));
-    core.info((new Date()).toTimeString());
+		core.setOutput('gemstone-version', version)
 
-    core.setOutput('time', new Date().toTimeString());
-  } catch (error) {
+    const superDoitBranch = core.getInput('smalltalkCI-branch') || DEFAULT_BRANCH
+    const superDoitSource = core.getInput('smalltalkCI-source') || DEFAULT_SOURCE
+
+    /* Download and extract superDoit. */
+    console.log('Downloading and extractingsuperDoit...')
+    let tempDir = path.join(os.homedir(), '.superDoit-temp')
+    const toolPath = await tc.downloadTool(`https://github.com/${superDoitSource}/archive/${superDoitBranch}.tar.gz`)
+    tempDir = await tc.extractTar(toolPath, tempDir)
+    await io.mv(path.join(tempDir, `superDoit-${superDoitBranch}`), INSTALLATION_DIRECTORY)
+
+    /* Set up superDoit command. */
+    core.addPath(path.join(INSTALLATION_DIRECTORY, 'bin'))
+
+    /* Set up superDoit examples --- TESTING */
+    core.addPath(path.join(INSTALLATION_DIRECTORY, 'examples/simple'))
+
+	} catch (error) {
     core.setFailed(error.message);
   }
 }

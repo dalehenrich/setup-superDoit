@@ -1,0 +1,25 @@
+name: "CI"
+on: [push, pull_request]
+
+jobs:
+  npm:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@main
+    - run: npm ci
+    - run: npm test
+
+  self-test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ macos-latest, ubuntu-latest ]
+    steps:
+    - uses: actions/checkout@master
+    - uses: dalehenrich/setup-superDoit@main
+      with:
+        gemstone-version: '3.6.0'
+        superDoit-branch: 'issue_21'
+    - run: |
+        examples/simple/simple.solo -h
+

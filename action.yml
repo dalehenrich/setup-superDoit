@@ -1,13 +1,20 @@
-name: 'Wait'
-description: 'Wait a designated number of milliseconds'
+name: 'Setup superDoit'
+description: 'Setup superDoit for running GemStone Smalltalk scripts: .stone, .solo, and .topaz'
+author: 'Dale Henrichs, GemTalk Systems'
 inputs:
-  milliseconds:  # id of input
-    description: 'number of milliseconds to wait'
-    required: true
-    default: '1000'
+  gemstone-version:
+    description: 'Version of GemStone to use when running scripts'
+  superDoit-source:
+    description: 'GigHub slug of the superDoit source repository'
+    required: false
+    default: 'dalehenrich/superDoit'
+  superDoit-branch:
+    description: 'Branch or tag to use from superDoit repository'
+    required: false
+    default: 'masterV1.0'
 outputs:
-  time: # output will be available to future steps
-    description: 'The current time after waiting'
+  gemstone-version:
+    description: 'GemStone version selection'
 runs:
   using: 'node12'
   main: 'dist/index.js'
