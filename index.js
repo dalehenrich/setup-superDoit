@@ -42,7 +42,11 @@ async function run() {
 		console.log( path.join(soloTempDir, `superDoit-${superDoitBranch}`))
 		console.log( GEMSTONE_DIRECTORY)
 			console.log('[5]')
-    await mv(path.join(soloTempDir, `superDoit-${superDoitBranch}`), GEMSTONE_DIRECTORY)
+    await mv(path.join(soloTempDir, `superDoit-${superDoitBranch}`), GEMSTONE_DIRECTORY, function(err) {
+      if (err) {
+      // handle the error
+      logError(error)
+      }})
 			console.log('[6]')
 
     /* Set up superDoit command. */
