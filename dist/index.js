@@ -9407,8 +9407,8 @@ async function run() {
     let soloTempDir = path.join(os.homedir(), '.solodbf-temp')
     const soloToolPath = await tc.downloadTool(`https://github.com/dalehenrich/superDoit/releases/download/v0.1.0/${version}_extent0.solo.dbf.gz`)
     await gunzip( soloToolPath, soloTempDir)
-		console.log(soloTempDir)
-		fs.readdirSync(soloTempDir).forEach(file => {
+		console.log(os.homedir())
+		fs.readdirSync(os.homedir()).forEach(file => {
       console.log(file);
     })
 		console.log(GEMSTONE_DIRECTORY)
