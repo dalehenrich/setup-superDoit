@@ -31,23 +31,14 @@ async function run() {
     console.log('Downloading and extracting extent0.solo.dbf...')
     let soloTempDir = path.join(os.homedir(), '.solodbf-temp')
     const soloToolPath = await tc.downloadTool(`https://github.com/dalehenrich/superDoit/releases/download/v0.1.0/${version}_extent0.solo.dbf.gz`)
-			console.log('[1]')
 		console.log(soloToolPath)
-			console.log('[2]')
 		console.log( soloTempDir)
-			console.log('[3]')
     await gunzip( soloToolPath, soloTempDir)
-			console.log('[4]')
-		console.log( soloTempDir)
-		console.log( path.join(soloTempDir, `superDoit-${superDoitBranch}`))
-		console.log( GEMSTONE_DIRECTORY)
-			console.log('[5]')
     await mv(path.join(soloTempDir, `superDoit-${superDoitBranch}`), GEMSTONE_DIRECTORY, function(err) {
       if (err) {
       // handle the error
       console.log(error)
       }})
-			console.log('[6]')
 
     /* Set up superDoit command. */
     core.addPath(path.join(INSTALLATION_DIRECTORY, 'bin'))
