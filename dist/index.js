@@ -5406,6 +5406,14 @@ module.exports = v4;
 
 /***/ }),
 
+/***/ 84:
+/***/ ((module) => {
+
+module.exports = eval("require")("mv");
+
+
+/***/ }),
+
 /***/ 357:
 /***/ ((module) => {
 
@@ -5572,11 +5580,13 @@ const path = __nccwpck_require__(622)
 const io = __nccwpck_require__(436)
 const os = __nccwpck_require__(87)
 const tc = __nccwpck_require__(784)
+const mv = __nccwpck_require__(84)
 
 const DEFAULT_BRANCH = 'masterV1.0'
 const DEFAULT_SOURCE = 'dalehenrich/superDoit'
 
 const INSTALLATION_DIRECTORY = path.join(os.homedir(), '.superDoit')
+const GEMSTONE_DIRECTORY = path.join(os.homedir(), '.superDoit/gemstone/gs')
 
 async function run() {
   try {
@@ -5593,6 +5603,11 @@ async function run() {
     const toolPath = await tc.downloadTool(`https://github.com/${superDoitSource}/archive/${superDoitBranch}.tar.gz`)
     tempDir = await tc.extractTar(toolPath, tempDir)
     await io.mv(path.join(tempDir, `superDoit-${superDoitBranch}`), INSTALLATION_DIRECTORY)
+
+    let soloTempDir = path.join(os.homedir(), '.solodbf-temp')
+    const soloToolPath = await tc.downloadTool(`https://github.com/dalehenrich/superDoit/releases/download/v0.1.0/${version}_extent0.solo.dbf.gz"`)
+    soloTempDir = await tc.extractZip(soloToolPath, soloTempDir)
+    await mv(path.join(soloTempDir, `superDoit-${superDoitBranch}`), GEMSTONE_DIRECTORY)
 
     /* Set up superDoit command. */
     core.addPath(path.join(INSTALLATION_DIRECTORY, 'bin'))

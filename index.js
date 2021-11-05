@@ -3,11 +3,13 @@ const path = require('path')
 const io = require('@actions/io')
 const os = require('os')
 const tc = require('@actions/tool-cache')
+const mv = require('mv')
 
 const DEFAULT_BRANCH = 'masterV1.0'
 const DEFAULT_SOURCE = 'dalehenrich/superDoit'
 
 const INSTALLATION_DIRECTORY = path.join(os.homedir(), '.superDoit')
+const GEMSTONE_DIRECTORY = path.join(os.homedir(), '.superDoit/gemstone/gs')
 
 async function run() {
   try {
@@ -24,6 +26,11 @@ async function run() {
     const toolPath = await tc.downloadTool(`https://github.com/${superDoitSource}/archive/${superDoitBranch}.tar.gz`)
     tempDir = await tc.extractTar(toolPath, tempDir)
     await io.mv(path.join(tempDir, `superDoit-${superDoitBranch}`), INSTALLATION_DIRECTORY)
+
+    let soloTempDir = path.join(os.homedir(), '.solodbf-temp')
+    const soloToolPath = await tc.downloadTool(`https://github.com/dalehenrich/superDoit/releases/download/v0.1.0/${version}_extent0.solo.dbf.gz"`)
+    soloTempDir = await tc.extractZip(soloToolPath, soloTempDir)
+    await mv(path.join(soloTempDir, `superDoit-${superDoitBranch}`), GEMSTONE_DIRECTORY)
 
     /* Set up superDoit command. */
     core.addPath(path.join(INSTALLATION_DIRECTORY, 'bin'))
