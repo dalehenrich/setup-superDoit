@@ -9410,7 +9410,7 @@ async function run() {
 			console.log('[2]')
 		console.log( soloTempDir)
 			console.log('[3]')
-    soloTempDir = await gunzip( soloToolPath, soloTempDir)
+    await gunzip( soloToolPath, soloTempDir)
 			console.log('[4]')
 		console.log( soloTempDir)
 			console.log('[5]')
