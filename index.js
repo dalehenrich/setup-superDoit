@@ -5,6 +5,7 @@ const os = require('os')
 const tc = require('@actions/tool-cache')
 const mv = require('mv')
 const gunzip = require('gunzip-file')
+const fs = require('fs');
 
 const DEFAULT_BRANCH = 'masterV1.0'
 const DEFAULT_SOURCE = 'dalehenrich/superDoit'
@@ -32,6 +33,14 @@ async function run() {
     let soloTempDir = path.join(os.homedir(), '.solodbf-temp')
     const soloToolPath = await tc.downloadTool(`https://github.com/dalehenrich/superDoit/releases/download/v0.1.0/${version}_extent0.solo.dbf.gz`)
     await gunzip( soloToolPath, soloTempDir)
+		console.log(path.join(soloTempDir, `superDoit-${superDoitBranch}`))
+		fs.readdirSync(path.join(soloTempDir, `superDoit-${superDoitBranch}`)).forEach(file => {
+      console.log(file);
+    })
+		console.log(GEMSTONE_DIRECTORY)
+		fs.readdirSync(GEMSTONE_DIRECTORY).forEach(file => {
+      console.log(file);
+    })
     await mv(path.join(soloTempDir, `superDoit-${superDoitBranch}`), GEMSTONE_DIRECTORY, function(err) {
       if (err) {
       // handle the error

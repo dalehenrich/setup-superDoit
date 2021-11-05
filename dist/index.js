@@ -9379,6 +9379,7 @@ const os = __nccwpck_require__(2087)
 const tc = __nccwpck_require__(7784)
 const mv = __nccwpck_require__(6371)
 const gunzip = __nccwpck_require__(1959)
+const fs = __nccwpck_require__(5747);
 
 const DEFAULT_BRANCH = 'masterV1.0'
 const DEFAULT_SOURCE = 'dalehenrich/superDoit'
@@ -9406,6 +9407,14 @@ async function run() {
     let soloTempDir = path.join(os.homedir(), '.solodbf-temp')
     const soloToolPath = await tc.downloadTool(`https://github.com/dalehenrich/superDoit/releases/download/v0.1.0/${version}_extent0.solo.dbf.gz`)
     await gunzip( soloToolPath, soloTempDir)
+		console.log(path.join(soloTempDir, `superDoit-${superDoitBranch}`))
+		fs.readdirSync(path.join(soloTempDir, `superDoit-${superDoitBranch}`)).forEach(file => {
+      console.log(file);
+    })
+		console.log(GEMSTONE_DIRECTORY)
+		fs.readdirSync(GEMSTONE_DIRECTORY).forEach(file => {
+      console.log(file);
+    })
     await mv(path.join(soloTempDir, `superDoit-${superDoitBranch}`), GEMSTONE_DIRECTORY, function(err) {
       if (err) {
       // handle the error
