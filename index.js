@@ -42,7 +42,7 @@ async function run() {
     /* Download and extract GemStone product tree. */
     console.log('Download and extract GemStone product tree...')
 		const gemstoneTreePath = await tc.downloadTool(`https://ftp.gemtalksystems.com/GemStone64/${version}/GemStone64Bit${version}-x86_64.Linux.zip`)
-    await tc.extractTar(gemstoneTreePath, GEMSTONE_DIRECTORY)
+    await tc.extractZip(gemstoneTreePath, GEMSTONE_DIRECTORY)
 
 
 		console.log(GEMSTONE_DIRECTORY)
