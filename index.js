@@ -43,10 +43,11 @@ async function run() {
     })
 		console.log("soloTempDir")
 		console.log(soloTempDir)
-    await mv(soloTempDir, GEMSTONE_DIRECTORY, function(err) {
+    // await mv(soloTempDir, path.join(GEMSTONE_DIRECTORY, 'extent0.solo.dbf'), function(err) {
+    await mv(soloTempDir, path.join(GEMSTONE_DIRECTORY), function(err) {
       if (err) {
       // handle the error
-      console.log(err)
+      core.setFailed(err.message)
       }})
 
     /* Set up superDoit command. */
