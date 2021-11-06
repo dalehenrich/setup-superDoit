@@ -29,6 +29,7 @@
     "@actions/io": "^1.1.1",
     "@actions/tool-cache": "^1.7.1",
     "child_process": "^1.0.2",
+    "create-symlink": "^1.0.0",
     "gunzip-file": "^0.1.1",
     "mv": "^2.1.1",
     "process": "^0.11.10"

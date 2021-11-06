@@ -1,11 +1,12 @@
-const core = require('@actions/core');
+const core = require('@actions/core')
 const path = require('path')
 const io = require('@actions/io')
 const os = require('os')
 const tc = require('@actions/tool-cache')
 const mv = require('mv')
 const gunzip = require('gunzip-file')
-const fs = require('fs');
+const fs = require('fs')
+const createSymlink = require('create-symlink')
 
 const DEFAULT_BRANCH = 'masterV1.0'
 const DEFAULT_SOURCE = 'dalehenrich/superDoit'
@@ -41,9 +42,10 @@ async function run() {
 
     /* Download and extract GemStone product tree. */
     console.log('Download and extract GemStone product tree...')
-		const gemstoneTreePath = await tc.downloadTool(`https://ftp.gemtalksystems.com/GemStone64/${version}/GemStone64Bit${version}-x86_64.Linux.zip`)
-    await tc.extractZip(gemstoneTreePath, GEMSTONE_DIRECTORY)
-
+		const productTreeZipPath = await tc.downloadTool(`https://ftp.gemtalksystems.com/GemStone64/${version}/GemStone64Bit${version}-x86_64.Linux.zip`)
+    const productTreeDir =  await tc.extractZip(productTreeZipPath, GEMSTONE_DIRECTORY)
+		await createSymlink('productTreeDir', path.join(GEMSTONE_DIRECTORY, 'product'))
+     
 
 		console.log(GEMSTONE_DIRECTORY)
 		console.log('GEMSTONE_DIRECTORY contents')
