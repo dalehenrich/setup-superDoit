@@ -52,10 +52,13 @@ async function run() {
 		// create symbolic link to product
 		await createSymlink(path.join(productTreeDir, `GemStone64Bit${version}-x86_64.Linux`), path.join(GEMSTONE_DIRECTORY, 'product'))
 
-		/* Set up superDoit command. */
+		/* Set up superDoit command */
     core.addPath(path.join(INSTALLATION_DIRECTORY, 'bin'))
 
-    /* Set up superDoit examples --- TESTING */
+		/* Set up for superDoit GemStone .solo scripts */
+    core.addPath(path.join(INSTALLATION_DIRECTORY, 'gemstone/bin'))
+
+		/* Set up for superDoit examples --- TESTING */
     core.addPath(path.join(INSTALLATION_DIRECTORY, 'examples/simple'))
     core.addPath(path.join(INSTALLATION_DIRECTORY, 'examples/utility'))
 

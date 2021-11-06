@@ -1,4 +1,6 @@
-# setup-superDoit - "Just enough javascript to use GemStone smalltalk for everything else"
+# setup-superDoit
+
+## Just enough javascript to use GemStone Smalltalk for everything else
 
 This GitHub Action sets up [superDoit] for using GemStone Smalltalk scripts in GitHub Actions.
 After running setup-superDoit, the system is setup to run .solo scripts. 
