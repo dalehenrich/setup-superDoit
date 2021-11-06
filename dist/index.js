@@ -10641,12 +10641,23 @@ async function run() {
     const superDoitSource = core.getInput('superDoit-source') || DEFAULT_SOURCE
 
     /* Download and extract superDoit. */
-    console.log(`Download and extract superDoit...${superDoitSource} ${superDoitBranch}`)
-    let tempDir = path.join(os.homedir(), '.superDoit-temp')
-    const toolPath = await tc.downloadTool(`https://github.com/${superDoitSource}/archive/${superDoitBranch}.tar.gz`)
-    tempDir = await tc.extractTar(toolPath, tempDir)
-    await io.mv(path.join(tempDir, `superDoit-${superDoitBranch}`), INSTALLATION_DIRECTORY)
-
+		let doDownload = false;
+		try {
+			fs.lstatSync(superDoitSource)
+		} catch (e) {
+			// not a file or directory, so must be a github repo spec
+ 	  	doDownload = true;
+		};
+		if (doDownLoad) {
+    	console.log(`Download and extract superDoit...${superDoitSource}@${superDoitBranch}`)
+    	let tempDir = path.join(os.homedir(), '.superDoit-temp')
+    	const toolPath = await tc.downloadTool(`https://github.com/${superDoitSource}/archive/${superDoitBranch}.tar.gz`)
+    	tempDir = await tc.extractTar(toolPath, tempDir)
+    	await io.mv(path.join(tempDir, `superDoit-${superDoitBranch}`), INSTALLATION_DIRECTORY)
+		} else {
+   		console.log(`Using existing superDoit directory ...${superDoitSource}`)
+			await createSymlink( superDoitSource, INSTALLATION_DIRECTORY)
+		}
     console.log('Download and extract extent0.solo.dbf...')
     let soloTempDir = path.join(os.homedir(), '.solodbf-temp')
     const soloToolPath = await tc.downloadTool(`https://github.com/dalehenrich/superDoit/releases/download/v0.1.0/${version}_extent0.solo.dbf.gz`)
