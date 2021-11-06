@@ -10658,6 +10658,13 @@ async function run() {
    		console.log(`Using existing superDoit directory ...${superDoitSource}`)
 			await createSymlink( superDoitSource, INSTALLATION_DIRECTORY)
 		}
+
+		console.log(INSTALLATION_DIRECTORY)
+		console.log('INSTALLATION_DIRECTORY contents')
+		fs.readdirSync(INSTALLATION_DIRECTORY).forEach(file => {
+      console.log(file);
+    })
+
     console.log('Download and extract extent0.solo.dbf...')
     let soloTempDir = path.join(os.homedir(), '.solodbf-temp')
     const soloToolPath = await tc.downloadTool(`https://github.com/dalehenrich/superDoit/releases/download/v0.1.0/${version}_extent0.solo.dbf.gz`)
