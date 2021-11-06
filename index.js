@@ -33,21 +33,18 @@ async function run() {
     let soloTempDir = path.join(os.homedir(), '.solodbf-temp')
     const soloToolPath = await tc.downloadTool(`https://github.com/dalehenrich/superDoit/releases/download/v0.1.0/${version}_extent0.solo.dbf.gz`)
     await gunzip( soloToolPath, soloTempDir)
-		console.log("soloTempDir")
-		console.log(soloTempDir)
-		console.log(os.homedir())
-		console.log(GEMSTONE_DIRECTORY)
-		console.log('GEMSTONE_DIRECTORY contents')
-		fs.readdirSync(GEMSTONE_DIRECTORY).forEach(file => {
-      console.log(file);
-    })
-		console.log("soloTempDir")
-		console.log(soloTempDir)
     await mv(soloTempDir, path.join(GEMSTONE_DIRECTORY, 'extent0.solo.dbf'), function(err) {
       if (err) {
       // handle the error
       core.setFailed(err.message)
       }})
+
+		console.log(GEMSTONE_DIRECTORY)
+		console.log('GEMSTONE_DIRECTORY contents')
+		fs.readdirSync(GEMSTONE_DIRECTORY).forEach(file => {
+      console.log(file);
+    })
+
 
     /* Set up superDoit command. */
     core.addPath(path.join(INSTALLATION_DIRECTORY, 'bin'))
