@@ -11,14 +11,15 @@ jobs:
     strategy:
       matrix:
         os: [ ubuntu-latest ]
+        gemstone: [ 3.6.0, 3.6.1 ]
+    name: ${{ matrix.gemstone }} ${{ matrix.os }}
     steps:
     - uses: actions/checkout@main
     - uses: dalehenrich/setup-superDoit@main
       with:
-        gemstone-version: '3.6.0'
+        gemstone-version: ${{matrix.gemstone}}
         superDoit-branch: 'issue_21'
     - run: |
-        which simple.solo
-        ls /home/runner/.superDoit/gemstone/gs
         simple.solo -h
+        versionReport.solo
 
