@@ -10674,6 +10674,7 @@ async function run() {
 
     /* Set up superDoit examples --- TESTING */
     core.addPath(path.join(INSTALLATION_DIRECTORY, 'examples/simple'))
+    core.addPath(path.join(INSTALLATION_DIRECTORY, 'examples/utility'))
 
 	} catch (error) {
     core.setFailed(error.message);
