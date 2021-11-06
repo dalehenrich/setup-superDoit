@@ -52,7 +52,7 @@ async function run() {
 		};
 		console.log('BEFORE [5]')
 		console.log(`doDownLoad ${doDownLoad}`)
-		if (doDownLoad) {
+		if (doDownLoad == true) {
     	console.log(`Download and extract superDoit...${superDoitSource}@${superDoitBranch}`)
     	let tempDir = path.join(os.homedir(), '.superDoit-temp')
     	const toolPath = await tc.downloadTool(`https://github.com/${superDoitSource}/archive/${superDoitBranch}.tar.gz`)
