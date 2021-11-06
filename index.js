@@ -23,6 +23,15 @@ async function run() {
     const superDoitBranch = core.getInput('superDoit-branch') || DEFAULT_BRANCH
     const superDoitSource = core.getInput('superDoit-source') || DEFAULT_SOURCE
 
+		console.log('/home/runner contents')
+		fs.readdirSync('/home/runner').forEach(file => {
+      console.log(file);
+    })
+		console.log('/home/runner/work contents')
+		fs.readdirSync('/home/runner/work').forEach(file => {
+      console.log(file);
+    })
+
 		console.log(`INSTALLATION_DIRECTORY: ${INSTALLATION_DIRECTORY}`)
 		console.log(`superDoitSource: ${superDoitSource}`)
     /* Download and extract superDoit. */
