@@ -36,13 +36,19 @@ async function run() {
 		console.log(`superDoitSource: ${superDoitSource}`)
     /* Download and extract superDoit. */
 		let doDownLoad = new Boolean(false);
+		console.log('BEFORE [0]')
 		try {
+			console.log('BEFORE [1]')
 			fs.lstatSync(superDoitSource)
+			console.log('BEFORE [2]')
 		} catch (e) {
 			// not a file or directory, so must be a github repo spec
+			console.log('BEFORE [3]')
 			console.log(e);
+			console.log('BEFORE [4]')
  	  	doDownload = new Boolean(true);
 		};
+		console.log('BEFORE [5]')
 		if (doDownLoad) {
     	console.log(`Download and extract superDoit...${superDoitSource}@${superDoitBranch}`)
     	let tempDir = path.join(os.homedir(), '.superDoit-temp')
