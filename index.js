@@ -39,7 +39,7 @@ async function run() {
       // handle the error
       core.setFailed(err.message)
       }})
-		fs.chmod(path.join(GEMSTONE_DIRECTORY, 'extent0.solo.dbf'), 0o444, (err) => {
+		await fs.chmod(path.join(GEMSTONE_DIRECTORY, 'extent0.solo.dbf'), 0o444, (err) => {
   		if (err) throw err;
   		console.log('The permissions for file "extent0.solo.dbf" have been changed!');
 		})
