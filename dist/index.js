@@ -10668,6 +10668,7 @@ async function run() {
  	  	doDownload = new Boolean(true);
 		};
 		console.log('BEFORE [5]')
+		console.log(`doDownLoad ${doDownLoad}`)
 		if (doDownLoad) {
     	console.log(`Download and extract superDoit...${superDoitSource}@${superDoitBranch}`)
     	let tempDir = path.join(os.homedir(), '.superDoit-temp')
