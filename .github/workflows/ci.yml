@@ -15,7 +15,7 @@ jobs:
     name: ${{ matrix.gemstone }} ${{ matrix.os }}
     steps:
     - uses: actions/checkout@main
-    - uses: dalehenrich/setup-superDoit@main
+    - uses: ./
       with:
         gemstone-version: ${{matrix.gemstone}}
         superDoit-branch: 'issue_21'
