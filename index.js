@@ -51,7 +51,7 @@ async function run() {
 
 		console.log(INSTALLATION_DIRECTORY)
 		console.log('INSTALLATION_DIRECTORY contents')
-		fs.readdirSync(superDoitSource).forEach(file => {
+		fs.readdirSync(INSTALLATION_DIRECTORY).forEach(file => {
       console.log(file);
     })
 
