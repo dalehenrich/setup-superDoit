@@ -10438,14 +10438,6 @@ function wrappy (fn, cb) {
 
 /***/ }),
 
-/***/ 3207:
-/***/ ((module) => {
-
-module.exports = eval("require")("chmod");
-
-
-/***/ }),
-
 /***/ 2357:
 /***/ ((module) => {
 
@@ -10632,7 +10624,6 @@ const mv = __nccwpck_require__(6371)
 const gunzip = __nccwpck_require__(1959)
 const fs = __nccwpck_require__(5747)
 const createSymlink = __nccwpck_require__(2345)
-const chmod = __nccwpck_require__(3207);
 
 const DEFAULT_BRANCH = 'masterV1.0'
 const DEFAULT_SOURCE = 'dalehenrich/superDoit'
@@ -10665,7 +10656,10 @@ async function run() {
       // handle the error
       core.setFailed(err.message)
       }})
-		chmod(path.join(GEMSTONE_DIRECTORY, 'extent0.solo.dbf'), 444)
+		fs.chmod(path.join(GEMSTONE_DIRECTORY, 'extent0.solo.dbf'), 0o444, (err) => {
+  		if (err) throw err;
+  		console.log('The permissions for file "extent0.solo.dbf" have been changed!');
+		})
 
     /* Download and extract GemStone product tree. */
     console.log('Download and extract GemStone product tree...')

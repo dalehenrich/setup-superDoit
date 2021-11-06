@@ -7,7 +7,6 @@ const mv = require('mv')
 const gunzip = require('gunzip-file')
 const fs = require('fs')
 const createSymlink = require('create-symlink')
-const chmod = require('chmod');
 
 const DEFAULT_BRANCH = 'masterV1.0'
 const DEFAULT_SOURCE = 'dalehenrich/superDoit'
@@ -40,7 +39,10 @@ async function run() {
       // handle the error
       core.setFailed(err.message)
       }})
-		chmod(path.join(GEMSTONE_DIRECTORY, 'extent0.solo.dbf'), 444)
+		fs.chmod(path.join(GEMSTONE_DIRECTORY, 'extent0.solo.dbf'), 0o444, (err) => {
+  		if (err) throw err;
+  		console.log('The permissions for file "extent0.solo.dbf" have been changed!');
+		})
 
     /* Download and extract GemStone product tree. */
     console.log('Download and extract GemStone product tree...')
