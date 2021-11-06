@@ -29,6 +29,7 @@ async function run() {
 			fs.lstatSync(superDoitSource)
 		} catch (e) {
 			// not a file or directory, so must be a github repo spec
+			console.log(e);
  	  	doDownload = new Boolean(true);
 		};
 		if (doDownLoad) {
