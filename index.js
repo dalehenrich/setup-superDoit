@@ -35,6 +35,7 @@ async function run() {
     	console.log(`Is character device: ${stats.isCharacterDevice()}`);
     	console.log(`Is block device: ${stats.isBlockDevice()}`);		} catch (e) {
 			// not a file or directory, so must be a github repo spec
+			console.log(e.message);
  	  	doDownload = true;
 		};
 		if (doDownLoad) {
