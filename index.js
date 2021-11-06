@@ -24,7 +24,7 @@ async function run() {
     const superDoitSource = core.getInput('smalltalkCI-source') || DEFAULT_SOURCE
 
     /* Download and extract superDoit. */
-    console.log('Downloading and extracting superDoit...')
+    console.log(`Downloading and extracting superDoit...${superDoitSource}`)
     let tempDir = path.join(os.homedir(), '.superDoit-temp')
     const toolPath = await tc.downloadTool(`https://github.com/${superDoitSource}/archive/${superDoitBranch}.tar.gz`)
     tempDir = await tc.extractTar(toolPath, tempDir)
