@@ -10656,8 +10656,10 @@ async function run() {
 		console.log('BEFORE [0]')
 		try {
 			console.log('BEFORE [1]')
-			fs.lstatSync(superDoitSource)
+			const stat = fs.lstatSync(superDoitSource)
 			console.log('BEFORE [2]')
+			console.log(stat.isDirectory())
+			console.log('AFTER [2]')
 		} catch (e) {
 			// not a file or directory, so must be a github repo spec
 			console.log('BEFORE [3]')
