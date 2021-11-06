@@ -10641,13 +10641,13 @@ async function run() {
     const superDoitSource = core.getInput('superDoit-source') || DEFAULT_SOURCE
 
     /* Download and extract superDoit. */
-    console.log(`Downloading and extracting superDoit...${superDoitSource}@${superDoitBranch}`)
+    console.log(`Download and extract superDoit...${superDoitSource} ${superDoitBranch}`)
     let tempDir = path.join(os.homedir(), '.superDoit-temp')
     const toolPath = await tc.downloadTool(`https://github.com/${superDoitSource}/archive/${superDoitBranch}.tar.gz`)
     tempDir = await tc.extractTar(toolPath, tempDir)
     await io.mv(path.join(tempDir, `superDoit-${superDoitBranch}`), INSTALLATION_DIRECTORY)
 
-    console.log('Downloading and extracting extent0.solo.dbf...')
+    console.log('Download and extract extent0.solo.dbf...')
     let soloTempDir = path.join(os.homedir(), '.solodbf-temp')
     const soloToolPath = await tc.downloadTool(`https://github.com/dalehenrich/superDoit/releases/download/v0.1.0/${version}_extent0.solo.dbf.gz`)
     await gunzip( soloToolPath, soloTempDir)
