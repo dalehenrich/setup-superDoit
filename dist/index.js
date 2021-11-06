@@ -10652,7 +10652,7 @@ async function run() {
 		console.log(`INSTALLATION_DIRECTORY: ${INSTALLATION_DIRECTORY}`)
 		console.log(`superDoitSource: ${superDoitSource}`)
     /* Download and extract superDoit. */
-		let doDownLoad = new Boolean(false);
+		let doDownLoad = false;
 		console.log('BEFORE [0]')
 		try {
 			console.log('BEFORE [1]')
@@ -10665,7 +10665,7 @@ async function run() {
 			console.log('BEFORE [3]')
 			console.log(e);
 			console.log('BEFORE [4]')
- 	  	doDownload = new Boolean(true);
+ 	  	doDownload = true;
 		};
 		console.log('BEFORE [5]')
 		console.log(`doDownLoad ${doDownLoad}`)
