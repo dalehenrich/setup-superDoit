@@ -47,7 +47,7 @@ async function run() {
 		console.log('GemStone product tree')
 		console.log(productTreeDir)
 		console.log(path.join(GEMSTONE_DIRECTORY, 'product'))
-		await createSymlink(productTreeDir, path.join(GEMSTONE_DIRECTORY, 'product'))
+		await createSymlink(path.join(productTreeDir, `GemStone64/${version}/GemStone64Bit${version}-x86_64.Linux`), path.join(GEMSTONE_DIRECTORY, 'product'))
      
 
 		console.log(GEMSTONE_DIRECTORY)
