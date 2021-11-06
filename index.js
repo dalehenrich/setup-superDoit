@@ -20,8 +20,8 @@ async function run() {
 
 		core.setOutput('gemstone-version', version)
 
-    const superDoitBranch = core.getInput('smalltalkCI-branch') || DEFAULT_BRANCH
-    const superDoitSource = core.getInput('smalltalkCI-source') || DEFAULT_SOURCE
+    const superDoitBranch = core.getInput('superDoit-branch') || DEFAULT_BRANCH
+    const superDoitSource = core.getInput('superDoit-source') || DEFAULT_SOURCE
 
     /* Download and extract superDoit. */
     console.log(`Downloading and extracting superDoit...${superDoitSource}`)
