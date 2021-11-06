@@ -10640,58 +10640,25 @@ async function run() {
     const superDoitBranch = core.getInput('superDoit-branch') || DEFAULT_BRANCH
     const superDoitSource = core.getInput('superDoit-source') || DEFAULT_SOURCE
 
-		console.log('/home/runner contents')
-		fs.readdirSync('/home/runner').forEach(file => {
-      console.log(file);
-    })
-		console.log('/home/runner/work contents')
-		fs.readdirSync('/home/runner/work').forEach(file => {
-      console.log(file);
-    })
-
-		console.log(`INSTALLATION_DIRECTORY: ${INSTALLATION_DIRECTORY}`)
-		console.log(`superDoitSource: ${superDoitSource}`)
     /* Download and extract superDoit. */
 		let doDownLoad = false;
-		console.log('BEFORE [0]')
 		try {
-			console.log('BEFORE [1]')
 			const stat = fs.lstatSync(superDoitSource)
-			console.log('BEFORE [2]')
-			console.log(stat.isDirectory())
-			console.log('AFTER [2]')
 		} catch (e) {
 			// not a file or directory, so must be a github repo spec
-			console.log('BEFORE [3]')
-			console.log(e);
-			console.log('BEFORE [4]')
  	  	doDownLoad = true;
 		};
-		console.log('BEFORE [5]')
-		console.log(`doDownLoad ${doDownLoad}`)
 		if (doDownLoad) {
     	console.log(`Download and extract superDoit...${superDoitSource}@${superDoitBranch}`)
     	let tempDir = path.join(os.homedir(), '.superDoit-temp')
     	const toolPath = await tc.downloadTool(`https://github.com/${superDoitSource}/archive/${superDoitBranch}.tar.gz`)
     	tempDir = await tc.extractTar(toolPath, tempDir)
 
-		console.log(tempDir)
-		console.log('tempDir contents')
-		fs.readdirSync(tempDir).forEach(file => {
-      console.log(file);
-    })
-
     	await io.mv(path.join(tempDir, `superDoit-${superDoitBranch}`), INSTALLATION_DIRECTORY)
 		} else {
    		console.log(`Using existing superDoit directory ...${superDoitSource}`)
 			await createSymlink( superDoitSource, INSTALLATION_DIRECTORY)
 		}
-
-		console.log(INSTALLATION_DIRECTORY)
-		console.log('INSTALLATION_DIRECTORY contents')
-		fs.readdirSync(INSTALLATION_DIRECTORY).forEach(file => {
-      console.log(file);
-    })
 
     console.log('Download and extract extent0.solo.dbf...')
     let soloTempDir = path.join(os.homedir(), '.solodbf-temp')
