@@ -24,19 +24,12 @@ async function run() {
     const superDoitSource = core.getInput('superDoit-source') || DEFAULT_SOURCE
 
     /* Download and extract superDoit. */
-		let doDownLoad = false;
+		let doDownLoad = new Boolean(false);
 		try {
-			const stats = fs.lstatSync(superDoitSource)
-   		console.log(`Is file: ${stats.isFile()}`);
-    	console.log(`Is directory: ${stats.isDirectory()}`);
-    	console.log(`Is symbolic link: ${stats.isSymbolicLink()}`);
-    	console.log(`Is FIFO: ${stats.isFIFO()}`);
-    	console.log(`Is socket: ${stats.isSocket()}`);
-    	console.log(`Is character device: ${stats.isCharacterDevice()}`);
-    	console.log(`Is block device: ${stats.isBlockDevice()}`);		} catch (e) {
+			fs.lstatSync(superDoitSource)
+		} catch (e) {
 			// not a file or directory, so must be a github repo spec
-			console.log(e.message);
- 	  	doDownload = true;
+ 	  	doDownload = new Boolean(true);
 		};
 		if (doDownLoad) {
     	console.log(`Download and extract superDoit...${superDoitSource}@${superDoitBranch}`)
