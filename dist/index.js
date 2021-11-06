@@ -10640,6 +10640,8 @@ async function run() {
     const superDoitBranch = core.getInput('superDoit-branch') || DEFAULT_BRANCH
     const superDoitSource = core.getInput('superDoit-source') || DEFAULT_SOURCE
 
+		console.log(`INSTALLATION_DIRECTORY: ${INSTALLATION_DIRECTORY}`)
+		console.log(`superDoitSource: ${superDoitSource}`)
     /* Download and extract superDoit. */
 		let doDownLoad = new Boolean(false);
 		try {
