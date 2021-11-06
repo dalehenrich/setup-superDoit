@@ -18,7 +18,7 @@ jobs:
     - uses: ./
       with:
         gemstone-version: ${{matrix.gemstone}}
-        superDoit-branch: 'issue_21'
+        superDoit-branch: 'masterV1.0'
     - run: |
         simple.solo -h
         simple.solo
