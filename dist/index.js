@@ -10641,7 +10641,7 @@ async function run() {
     const superDoitSource = core.getInput('superDoit-source') || DEFAULT_SOURCE
 
     /* Download and extract superDoit. */
-		let doDownload = false;
+		let doDownLoad = false;
 		try {
 			fs.lstatSync(superDoitSource)
 		} catch (e) {
