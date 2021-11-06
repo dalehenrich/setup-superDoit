@@ -44,7 +44,7 @@ async function run() {
     console.log('Download and extract GemStone product tree...')
 		const productTreeZipPath = await tc.downloadTool(`https://ftp.gemtalksystems.com/GemStone64/${version}/GemStone64Bit${version}-x86_64.Linux.zip`)
     const productTreeDir =  await tc.extractZip(productTreeZipPath, GEMSTONE_DIRECTORY)
-		await createSymlink('productTreeDir', path.join(GEMSTONE_DIRECTORY, 'product'))
+		await createSymlink(productTreeDir, path.join(GEMSTONE_DIRECTORY, 'product'))
      
 
 		console.log(GEMSTONE_DIRECTORY)
