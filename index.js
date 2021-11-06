@@ -56,6 +56,12 @@ async function run() {
       console.log(file);
     })
 
+		console.log(path.join(GEMSTONE_DIRECTORY, 'product'))
+		console.log('GEMSTONE_DIRECTORY/product contents')
+		fs.readdirSync(path.join(GEMSTONE_DIRECTORY, 'product')).forEach(file => {
+      console.log(file);
+    })
+
 		
 		/* Set up superDoit command. */
     core.addPath(path.join(INSTALLATION_DIRECTORY, 'bin'))
