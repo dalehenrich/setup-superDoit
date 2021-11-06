@@ -7,6 +7,7 @@ const mv = require('mv')
 const gunzip = require('gunzip-file')
 const fs = require('fs')
 const createSymlink = require('create-symlink')
+const chmod = require('chmod');
 
 const DEFAULT_BRANCH = 'masterV1.0'
 const DEFAULT_SOURCE = 'dalehenrich/superDoit'
@@ -39,30 +40,16 @@ async function run() {
       // handle the error
       core.setFailed(err.message)
       }})
+		chmod(path.join(GEMSTONE_DIRECTORY, 'extent0.solo.dbf'), 444)
 
     /* Download and extract GemStone product tree. */
     console.log('Download and extract GemStone product tree...')
 		const productTreeZipPath = await tc.downloadTool(`https://ftp.gemtalksystems.com/GemStone64/${version}/GemStone64Bit${version}-x86_64.Linux.zip`)
     const productTreeDir =  await tc.extractZip(productTreeZipPath, GEMSTONE_DIRECTORY)
-		console.log('GemStone product tree')
-		console.log(productTreeDir)
-		console.log(path.join(GEMSTONE_DIRECTORY, 'product'))
+
+		// create symbolic link to product
 		await createSymlink(path.join(productTreeDir, `GemStone64Bit${version}-x86_64.Linux`), path.join(GEMSTONE_DIRECTORY, 'product'))
-     
 
-		console.log(GEMSTONE_DIRECTORY)
-		console.log('GEMSTONE_DIRECTORY contents')
-		fs.readdirSync(GEMSTONE_DIRECTORY).forEach(file => {
-      console.log(file);
-    })
-
-		console.log(path.join(GEMSTONE_DIRECTORY, 'product'))
-		console.log('GEMSTONE_DIRECTORY/product contents')
-		fs.readdirSync(path.join(GEMSTONE_DIRECTORY, `GemStone64Bit${version}-x86_64.Linux`)).forEach(file => {
-      console.log(file);
-    })
-
-		
 		/* Set up superDoit command. */
     core.addPath(path.join(INSTALLATION_DIRECTORY, 'bin'))
 
