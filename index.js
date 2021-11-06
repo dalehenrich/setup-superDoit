@@ -58,7 +58,7 @@ async function run() {
 
 		console.log(path.join(GEMSTONE_DIRECTORY, 'product'))
 		console.log('GEMSTONE_DIRECTORY/product contents')
-		fs.readdirSync(path.join(GEMSTONE_DIRECTORY, 'product')).forEach(file => {
+		fs.readdirSync(path.join(GEMSTONE_DIRECTORY, `GemStone64/${version}/GemStone64Bit${version}-x86_64.Linux`)).forEach(file => {
       console.log(file);
     })
 
