@@ -43,8 +43,7 @@ async function run() {
     })
 		console.log("soloTempDir")
 		console.log(soloTempDir)
-    // await mv(soloTempDir, path.join(GEMSTONE_DIRECTORY, 'extent0.solo.dbf'), function(err) {
-    await mv(soloTempDir, path.join(GEMSTONE_DIRECTORY), function(err) {
+    await mv(soloTempDir, path.join(GEMSTONE_DIRECTORY, 'extent0.solo.dbf'), function(err) {
       if (err) {
       // handle the error
       core.setFailed(err.message)
