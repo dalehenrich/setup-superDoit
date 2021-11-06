@@ -10660,8 +10660,7 @@ async function run() {
       console.log(file);
     })
 
-
-    	await io.mv(path.join(tempDir, `superDoit-${superDoitBranch}`), INSTALLATION_DIRECTORY)
+    	await io.mv(path.join(tempDir, 'superDoit-temp'), INSTALLATION_DIRECTORY)
 		} else {
    		console.log(`Using existing superDoit directory ...${superDoitSource}`)
 			await createSymlink( superDoitSource, INSTALLATION_DIRECTORY)
