@@ -39,14 +39,20 @@ async function run() {
       core.setFailed(err.message)
       }})
 
+    /* Download and extract GemStone product tree. */
+    console.log('Download and extract GemStone product tree...')
+		const gemstoneTreePath = await tc.downloadTool(`https://ftp.gemtalksystems.com/GemStone64/${version}/GemStone64Bit${version}-x86_64.Linux.zip`)
+    await tc.extractTar(gemstoneTreePath, GEMSTONE_DIRECTORY)
+
+
 		console.log(GEMSTONE_DIRECTORY)
 		console.log('GEMSTONE_DIRECTORY contents')
 		fs.readdirSync(GEMSTONE_DIRECTORY).forEach(file => {
       console.log(file);
     })
 
-
-    /* Set up superDoit command. */
+		
+		/* Set up superDoit command. */
     core.addPath(path.join(INSTALLATION_DIRECTORY, 'bin'))
 
     /* Set up superDoit examples --- TESTING */
