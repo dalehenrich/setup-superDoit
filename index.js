@@ -47,7 +47,7 @@ async function run() {
 		console.log('GemStone product tree')
 		console.log(productTreeDir)
 		console.log(path.join(GEMSTONE_DIRECTORY, 'product'))
-		await createSymlink(path.join(productTreeDir, `GemStone64/${version}/GemStone64Bit${version}-x86_64.Linux`), path.join(GEMSTONE_DIRECTORY, 'product'))
+		await createSymlink(path.join(productTreeDir, `GemStone64Bit${version}-x86_64.Linux`), path.join(GEMSTONE_DIRECTORY, 'product'))
      
 
 		console.log(GEMSTONE_DIRECTORY)
@@ -58,7 +58,7 @@ async function run() {
 
 		console.log(path.join(GEMSTONE_DIRECTORY, 'product'))
 		console.log('GEMSTONE_DIRECTORY/product contents')
-		fs.readdirSync(path.join(GEMSTONE_DIRECTORY, `GemStone64/${version}/GemStone64Bit${version}-x86_64.Linux`)).forEach(file => {
+		fs.readdirSync(path.join(GEMSTONE_DIRECTORY, `GemStone64Bit${version}-x86_64.Linux`)).forEach(file => {
       console.log(file);
     })
 
