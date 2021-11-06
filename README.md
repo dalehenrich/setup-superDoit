@@ -1,6 +1,8 @@
-# setup-smalltalkCI
+# setup-superDoit
 
 This GitHub Action sets up [superDoit] for using GemStone Smalltalk scripts in GitHub Actions.
+After running setup-superDoit, the system is setup to run .solo scripts. 
+See [superDoit] for .solo scripts to setup and start stones, so that .stone scripts can be run.
 
 ## Usage
 
