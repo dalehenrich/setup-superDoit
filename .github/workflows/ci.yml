@@ -10,6 +10,8 @@ on:
 jobs:
   self-test:
     runs-on: ${{ matrix.os }}
+    env:
+       PLATFORM: ${{ matrix.os }}
     strategy:
       matrix:
         os: [ ubuntu-latest ]
