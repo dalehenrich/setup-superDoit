@@ -13,7 +13,8 @@ const DEFAULT_BRANCH = 'masterV1.0'
 const DEFAULT_SOURCE = 'dalehenrich/superDoit'
 
 const INSTALLATION_DIRECTORY = path.join(os.homedir(), '.superDoit')
-const GEMSTONE_DIRECTORY = path.join(os.homedir(), '.superDoit/gemstone/gs')
+const GEMSTONE_SOLO_DIRECTORY = path.join(os.homedir(), '.superDoit/gemstone/solo')
+const GEMSTONE_PRODUCTS_DIRECTORY = path.join(os.homedir(), '.superDoit/gemstone/products')
 
 async function run() {
   try {
@@ -48,12 +49,12 @@ async function run() {
     let soloTempDir = path.join(os.homedir(), '.solodbf-temp')
     const soloToolPath = await tc.downloadTool(`https://github.com/dalehenrich/superDoit/releases/download/v0.1.0/${version}_extent0.solo.dbf.gz`)
     await gunzip( soloToolPath, soloTempDir)
-    await mv(soloTempDir, path.join(GEMSTONE_DIRECTORY, 'extent0.solo.dbf'), function(err) {
+    await mv(soloTempDir, path.join(GEMSTONE_SOLO_DIRECTORY, 'extent0.solo.dbf'), function(err) {
       if (err) {
       	// handle the error
       	core.setFailed(err.message)
       }})
-		await fs.chmod(path.join(GEMSTONE_DIRECTORY, 'extent0.solo.dbf'), 0o444, (err) => {
+		await fs.chmod(path.join(GEMSTONE_SOLO_DIRECTORY, 'extent0.solo.dbf'), 0o444, (err) => {
   		if (err) throw err;
   		console.log('The permissions for file "extent0.solo.dbf" have been changed!');
 		})
@@ -63,13 +64,13 @@ async function run() {
 		const osPlatform = process.env.PLATFORM
 		if (osPlatform == 'ubuntu-18.04') {
 			const productTreeZipPath = await tc.downloadTool(`https://ftp.gemtalksystems.com/GemStone64/${version}/GemStone64Bit${version}-x86_64.Linux.zip`)
-    	const productTreeDir =  await tc.extractZip(productTreeZipPath, GEMSTONE_DIRECTORY)
+    	const productTreeDir =  await tc.extractZip(productTreeZipPath, GEMSTONE_PRODUCTS_DIRECTORY)
 			// create symbolic link to product
-			await createSymlink(path.join(productTreeDir, `GemStone64Bit${version}-x86_64.Linux`), path.join(GEMSTONE_DIRECTORY, 'product'))
+			await createSymlink(path.join(productTreeDir, `GemStone64Bit${version}-x86_64.Linux`), path.join(GEMSTONE_SOLO_DIRECTORY, 'product'))
 		} else if (osPlatform == 'macos-10.15') {
 			// NOT FUNCTIONAL!!!
 			const productTreeZipPath = await tc.downloadTool(`https://ftp.gemtalksystems.com/GemStone64/${version}/GemStone64Bit${version}-i386.Darwin.dmg`)
-			await extractDmg(`GemStone64Bit${version}-i386.Darwin.dmg`, path.join(GEMSTONE_DIRECTORY, 'product'))
+			await extractDmg(`GemStone64Bit${version}-i386.Darwin.dmg`, path.join(GEMSTONE_SOLO_DIRECTORY, 'product'))
 		} else {
 			core.setFailed(`Unsupported platform ${osPlatform}`)
 		}

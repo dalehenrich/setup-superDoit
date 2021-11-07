@@ -15,28 +15,28 @@ jobs:
     strategy:
       matrix:
         os: [ ubuntu-18.04 ]
-        gemstone: [ 3.6.0, 3.6.1 ]
+        gemstone: [ 3.6.1 ]
     name: ${{ matrix.gemstone }} ${{ matrix.os }}
     steps:
     - uses: actions/checkout@main
     - uses: ./
       with:
         gemstone-version: ${{matrix.gemstone}}
-        superDoit-branch: 'issue_21'
+        superDoit-branch: 'issue_24'
     - run: |
         simple.solo -h
         simple.solo
         versionReport.solo
-  slack-workflow-status:
-    if: always()
-    name: Post Workflow Status To Slack
-    needs:
-      - self-test
-    runs-on: ubuntu-18.04
-    steps:
-       - name: Slack Workflow Notification
-         uses: Gamesight/slack-workflow-status@master
-         with:
-          repo_token: ${{secrets.GITHUB_TOKEN}}
-          slack_webhook_url: ${{secrets.SLACK_DALEHENRICH}}
-          name: 'action run' 
+#  slack-workflow-status:
+#    if: always()
+#    name: Post Workflow Status To Slack
+#    needs:
+#      - self-test
+#    runs-on: ubuntu-18.04
+#    steps:
+#       - name: Slack Workflow Notification
+#         uses: Gamesight/slack-workflow-status@master
+#         with:
+#          repo_token: ${{secrets.GITHUB_TOKEN}}
+#          slack_webhook_url: ${{secrets.SLACK_DALEHENRICH}}
+#          name: 'action run' 
