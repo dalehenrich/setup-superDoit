@@ -13225,6 +13225,7 @@ async function run() {
 		const version = core.getInput('gemstone-version', { required: true })
 
 		core.setOutput('gemstone-version', version)
+		core.setOutput('gemstone-product-directory', GEMSTONE_PRODUCTS_DIRECTORY)
 
     const superDoitBranch = core.getInput('superDoit-branch') || DEFAULT_BRANCH
     const superDoitSource = core.getInput('superDoit-source') || DEFAULT_SOURCE

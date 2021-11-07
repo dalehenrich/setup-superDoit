@@ -18,12 +18,15 @@ jobs:
         gemstone: [ 3.6.1 ]
     name: ${{ matrix.gemstone }} ${{ matrix.os }}
     steps:
-    - uses: actions/checkout@main
-    - uses: ./
-      with:
-        gemstone-version: ${{matrix.gemstone}}
-        superDoit-branch: 'issue_24'
-    - run: |
+      - uses: actions/checkout@issue_6
+      - id: downloadSuperDoit
+        uses: ./
+        with:
+          gemstone-version: ${{matrix.gemstone}}
+          superDoit-branch: 'issue_24'
+      - run: |
+        echo product-version ${{ steps.downloadSuperDoit.outputs.gemstone-version }} product-directory ${{ steps.downloadSuperDoit.outputs.gemstone-product-directory }}
+      - run: |
         simple.solo -h
         simple.solo
         versionReport.solo
