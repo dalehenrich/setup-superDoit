@@ -13250,7 +13250,7 @@ async function run() {
 			await createSymlink( superDoitSource, INSTALLATION_DIRECTORY)
 		}
 
-    console.log('Download and extract extent0.solo.dbf...')
+    console.log(`Download and extract extent0.solo.dbf...[https://github.com/dalehenrich/superDoit/releases/download/v0.1.0/${version}_extent0.solo.dbf.gz]`)
     let soloTempDir = path.join(os.homedir(), '.solodbf-temp')
     const soloToolPath = await tc.downloadTool(`https://github.com/dalehenrich/superDoit/releases/download/v0.1.0/${version}_extent0.solo.dbf.gz`)
     await gunzip( soloToolPath, soloTempDir)
