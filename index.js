@@ -67,6 +67,7 @@ async function run() {
 			// create symbolic link to product
 			await createSymlink(path.join(productTreeDir, `GemStone64Bit${version}-x86_64.Linux`), path.join(GEMSTONE_DIRECTORY, 'product'))
 		} else if (osPlatform == 'macos-10.15') {
+			// NOT FUNCTIONAL!!!
 			const productTreeZipPath = await tc.downloadTool(`https://ftp.gemtalksystems.com/GemStone64/${version}/GemStone64Bit${version}-i386.Darwin.dmg`)
 			await extractDmg(`GemStone64Bit${version}-i386.Darwin.dmg`, path.join(GEMSTONE_DIRECTORY, 'product'))
 		} else {
