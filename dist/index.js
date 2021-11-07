@@ -13265,12 +13265,12 @@ async function run() {
     /* Download and extract GemStone product tree. */
     console.log('Download and extract GemStone product tree...')
 		const osPlatform = process.env.PLATFORM
-		if (osPlatform = 'ubuntu-18.04') {
+		if (osPlatform == 'ubuntu-18.04') {
 			const productTreeZipPath = await tc.downloadTool(`https://ftp.gemtalksystems.com/GemStone64/${version}/GemStone64Bit${version}-x86_64.Linux.zip`)
     	const productTreeDir =  await tc.extractZip(productTreeZipPath, GEMSTONE_DIRECTORY)
 			// create symbolic link to product
 			await createSymlink(path.join(productTreeDir, `GemStone64Bit${version}-x86_64.Linux`), path.join(GEMSTONE_DIRECTORY, 'product'))
-		} else if (osPlatform = 'macos-10.15') {
+		} else if (osPlatform == 'macos-10.15') {
 			const productTreeZipPath = await tc.downloadTool(`https://ftp.gemtalksystems.com/GemStone64/${version}/GemStone64Bit${version}-i386.Darwin.dmg`)
 			await extractDmg(`GemStone64Bit${version}-i386.Darwin.dmg`, path.join(GEMSTONE_DIRECTORY, 'product'))
 		} else {
