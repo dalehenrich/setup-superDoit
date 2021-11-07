@@ -24,11 +24,11 @@ jobs:
         with:
           gemstone-version: ${{matrix.gemstone}}
           superDoit-branch: 'issue_24'
+      - run: echo product-version ${{ steps.downloadSuperDoit.outputs.gemstone-version }} product-directory ${{ steps.downloadSuperDoit.outputs.gemstone-product-directory }}
       - run: |
-        echo product-version ${{ steps.downloadSuperDoit.outputs.gemstone-version }} product-directory ${{ steps.downloadSuperDoit.outputs.gemstone-product-directory }}
-        simple.solo -h
-        simple.solo
-        versionReport.solo
+          simple.solo -h
+          simple.solo
+          versionReport.solo
 #  slack-workflow-status:
 #    if: always()
 #    name: Post Workflow Status To Slack
