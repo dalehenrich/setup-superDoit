@@ -13268,18 +13268,16 @@ async function run() {
     console.log('Download and extract GemStone product tree...')
 		const osPlatform = process.env.PLATFORM
 		if (osPlatform == 'ubuntu-18.04') {
+			core.setOutput('gemstone-product-name', `GemStone64Bit${version}-x86_64.Linux`)
 			const productTreeZipPath = await tc.downloadTool(`https://ftp.gemtalksystems.com/GemStone64/${version}/GemStone64Bit${version}-x86_64.Linux.zip`)
     	const productTreeDir =  await tc.extractZip(productTreeZipPath, GEMSTONE_PRODUCTS_DIRECTORY)
 			// create symbolic link to product
 			await createSymlink(path.join(productTreeDir, `GemStone64Bit${version}-x86_64.Linux`), path.join(GEMSTONE_SOLO_DIRECTORY, 'product'))
 		} else if (osPlatform == 'macos-10.15') {
-			// NOT FUNCTIONAL!!!
-			const productTreeZipPath = await tc.downloadTool(`https://ftp.gemtalksystems.com/GemStone64/${version}/GemStone64Bit${version}-i386.Darwin.dmg`)
-			await extractDmg(`GemStone64Bit${version}-i386.Darwin.dmg`, path.join(GEMSTONE_SOLO_DIRECTORY, 'product'))
+			core.setOutput('gemstone-product-name', `GemStone64Bit${version}-i386.Darwin`)
 		} else {
 			core.setFailed(`Unsupported platform ${osPlatform}`)
 		}
-
 		/* Set up superDoit command */
     core.addPath(path.join(INSTALLATION_DIRECTORY, 'bin'))
 
@@ -13289,6 +13287,7 @@ async function run() {
 		/* Set up for superDoit examples --- TESTING */
     core.addPath(path.join(INSTALLATION_DIRECTORY, 'examples/simple'))
     core.addPath(path.join(INSTALLATION_DIRECTORY, 'examples/utility'))
+    core.addPath(path.join(INSTALLATION_DIRECTORY, 'examples/dev'))
 
 	} catch (error) {
     core.setFailed(error.message);

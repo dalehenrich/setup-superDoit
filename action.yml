@@ -17,6 +17,8 @@ outputs:
     description: 'GemStone version selection'
   gemstone-product-directory:
     description: 'directory where GemStone product tree should be installed'
+  gemstone-product-name:
+    description: 'name of GemStone product tree directory'
 runs:
   using: 'node12'
   main: 'dist/index.js'
