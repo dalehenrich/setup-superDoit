@@ -27,7 +27,7 @@ jobs:
     if: always()
     name: Post Workflow Status To Slack
     needs:
-      - build
+      - self-test
     runs-on: ubuntu-18.04
     steps:
        - name: Slack Workflow Notification
