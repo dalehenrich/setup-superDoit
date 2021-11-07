@@ -26,7 +26,6 @@ jobs:
           superDoit-branch: 'issue_24'
       - run: |
         echo product-version ${{ steps.downloadSuperDoit.outputs.gemstone-version }} product-directory ${{ steps.downloadSuperDoit.outputs.gemstone-product-directory }}
-      - run: |
         simple.solo -h
         simple.solo
         versionReport.solo
