@@ -13242,6 +13242,7 @@ async function run() {
     	console.log(`Download and extract superDoit...${superDoitSource}@${superDoitBranch}`)
     	let tempDir = path.join(os.homedir(), '.superDoit-temp')
     	const toolPath = await tc.downloadTool(`https://github.com/${superDoitSource}/archive/${superDoitBranch}.tar.gz`)
+		console.log(`toolPath :: ${toolPath}`)
     	tempDir = await tc.extractTar(toolPath, tempDir)
 
 		console.log(`tempDir :: ${tempDir}`)
@@ -13250,7 +13251,7 @@ async function run() {
       console.log(file);
     })
 
-		console.log(`superDoit-${superDoitBranch}`)
+		console.log(`superDoit-${superDoitBranch} contents`)
 		fs.readdirSync(path.join(tempDir, `superDoit-${superDoitBranch}`)).forEach(file => {
       console.log(file);
     })
