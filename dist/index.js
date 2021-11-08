@@ -13242,19 +13242,13 @@ async function run() {
     	console.log(`Download and extract superDoit...${superDoitSource}@${superDoitBranch}`)
     	let tempDir = path.join(os.homedir(), '.superDoit-temp')
     	const toolPath = await tc.downloadTool(`https://github.com/${superDoitSource}/archive/${superDoitBranch}.tar.gz`)
-		console.log(`toolPath :: ${toolPath}`)
     	tempDir = await tc.extractTar(toolPath, tempDir)
 
 		let unzippedDir = `superDoit-${superDoitBranch}`
 		fs.readdirSync(tempDir).forEach(file => {
       unzippedDir = file;
-			console.log(`unzipped $unzippedDir`)
     })
 
-		console.log(`${unzippedDir} contents`)
-		fs.readdirSync(path.join(tempDir, `${unzippedDir}`)).forEach(file => {
-      console.log(file);
-    })
     	await io.mv(path.join(tempDir, `${unzippedDir}`), INSTALLATION_DIRECTORY)
 		} else {
    		console.log(`Using existing superDoit directory ...${superDoitSource}`)
