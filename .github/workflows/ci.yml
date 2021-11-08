@@ -3,6 +3,7 @@ on:
   pull_request:
     branches:
       - v1
+      - v2
   push:
   schedule:
     - cron: "15 2 25 * *" #run job on the 25th day of every month on the 15th minute of the 2nd hour

@@ -13281,8 +13281,11 @@ async function run() {
 			core.setOutput('gemstone-product-name', `GemStone64Bit${version}-x86_64.Linux`)
 			const productTreeZipPath = await tc.downloadTool(`https://ftp.gemtalksystems.com/GemStone64/${version}/GemStone64Bit${version}-x86_64.Linux.zip`)
     	const productTreeDir =  await tc.extractZip(productTreeZipPath, GEMSTONE_PRODUCTS_DIRECTORY)
-			// create symbolic link to product
-			await createSymlink(path.join(productTreeDir, `GemStone64Bit${version}-x86_64.Linux`), path.join(GEMSTONE_SOLO_DIRECTORY, 'product'))
+			if ( (version == '3.6.0') || (version == '3.6.1') ) {
+				// create symbolic link to product
+				console.log(`Create symoblic link for GemStone64Bit${version}-x86_64.Linux to to solo/product dir`)
+				await createSymlink(path.join(productTreeDir, `GemStone64Bit${version}-x86_64.Linux`), path.join(GEMSTONE_SOLO_DIRECTORY, 'product'))
+			}
 		} else if (osPlatform == 'macos-10.15') {
 			core.setOutput('gemstone-product-name', `GemStone64Bit${version}-i386.Darwin`)
 		} else {
