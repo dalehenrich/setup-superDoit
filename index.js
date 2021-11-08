@@ -40,6 +40,7 @@ async function run() {
     	const toolPath = await tc.downloadTool(`https://github.com/${superDoitSource}/archive/${superDoitBranch}.tar.gz`)
     	tempDir = await tc.extractTar(toolPath, tempDir)
 
+		console.log(`tempDir :: ${tempDir}`)
 		console.log('tempDir contents')
 		fs.readdirSync(tempDir).forEach(file => {
       console.log(file);
