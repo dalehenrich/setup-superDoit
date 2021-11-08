@@ -13244,6 +13244,15 @@ async function run() {
     	const toolPath = await tc.downloadTool(`https://github.com/${superDoitSource}/archive/${superDoitBranch}.tar.gz`)
     	tempDir = await tc.extractTar(toolPath, tempDir)
 
+		console.log('tempDir contents')
+		fs.readdirSync(tempDir).forEach(file => {
+      console.log(file);
+    })
+
+		console.log(`superDoit-${superDoitBranch}`)
+		fs.readdirSync(path.join(tempDir, `superDoit-${superDoitBranch}`)).forEach(file => {
+      console.log(file);
+    })
     	await io.mv(path.join(tempDir, `superDoit-${superDoitBranch}`), INSTALLATION_DIRECTORY)
 		} else {
    		console.log(`Using existing superDoit directory ...${superDoitSource}`)
