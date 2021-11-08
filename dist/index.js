@@ -13245,15 +13245,17 @@ async function run() {
 		console.log(`toolPath :: ${toolPath}`)
     	tempDir = await tc.extractTar(toolPath, tempDir)
 
+		let unzippedDir = `superDoit-${superDoitBranch}`
 		fs.readdirSync(tempDir).forEach(file => {
-      const unzippedDir = file;
+      unzippedDir = file;
+			console.log(`unzipped $unzippedDir`)
     })
 
-		console.log(`superDoit-${unzippedDir} contents`)
-		fs.readdirSync(path.join(tempDir, `superDoit-${unzippedDir}`)).forEach(file => {
+		console.log(`${unzippedDir} contents`)
+		fs.readdirSync(path.join(tempDir, `${unzippedDir}`)).forEach(file => {
       console.log(file);
     })
-    	await io.mv(path.join(tempDir, `superDoit-${unzippedDir}`), INSTALLATION_DIRECTORY)
+    	await io.mv(path.join(tempDir, `${unzippedDir}`), INSTALLATION_DIRECTORY)
 		} else {
    		console.log(`Using existing superDoit directory ...${superDoitSource}`)
 			await createSymlink( superDoitSource, INSTALLATION_DIRECTORY)
