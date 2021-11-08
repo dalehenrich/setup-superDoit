@@ -46,9 +46,14 @@ async function run() {
 			await createSymlink( superDoitSource, INSTALLATION_DIRECTORY)
 		}
 
-    console.log(`Download and extract extent0.solo.dbf...[https://github.com/dalehenrich/superDoit/releases/download/v0.1.0/${version}_extent0.solo.dbf.gz]`)
+		let extentVersion = version
+		if ( (version != '3.6.0') && (version != '3.6.1') ) {
+			// default version
+			extentVersion = '3.6.1'
+		}
+    console.log(`Download and extract extent0.solo.dbf...[https://github.com/dalehenrich/superDoit/releases/download/v0.1.0/${extentVersion}_extent0.solo.dbf.gz]`)
     let soloTempDir = path.join(os.homedir(), '.solodbf-temp')
-    const soloToolPath = await tc.downloadTool(`https://github.com/dalehenrich/superDoit/releases/download/v0.1.0/${version}_extent0.solo.dbf.gz`)
+    const soloToolPath = await tc.downloadTool(`https://github.com/dalehenrich/superDoit/releases/download/v0.1.0/${extentVersion}_extent0.solo.dbf.gz`)
     await gunzip( soloToolPath, soloTempDir)
     await mv(soloTempDir, path.join(GEMSTONE_SOLO_DIRECTORY, 'extent0.solo.dbf'), function(err) {
       if (err) {
@@ -61,7 +66,7 @@ async function run() {
 		})
 
     /* Download and extract GemStone product tree. */
-    console.log('Download and extract GemStone product tree...')
+	  console.log(`Download and extract GemStone product tree...`)
 		const osPlatform = process.env.PLATFORM
 		if (osPlatform == 'ubuntu-18.04') {
 			core.setOutput('gemstone-product-name', `GemStone64Bit${version}-x86_64.Linux`)
