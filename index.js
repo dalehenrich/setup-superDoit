@@ -56,6 +56,7 @@ async function run() {
 			// default version
 			extentVersion = '3.6.1'
 		}
+		core.setOutput('solo-extent-version', extentVersion)
     console.log(`Download and extract extent0.solo.dbf...[https://github.com/dalehenrich/superDoit/releases/download/v0.1.0/${extentVersion}_extent0.solo.dbf.gz]`)
     let soloTempDir = path.join(os.homedir(), '.solodbf-temp')
     const soloToolPath = await tc.downloadTool(`https://github.com/dalehenrich/superDoit/releases/download/v0.1.0/${extentVersion}_extent0.solo.dbf.gz`)

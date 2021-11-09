@@ -19,6 +19,8 @@ outputs:
     description: 'directory where GemStone product tree should be installed'
   gemstone-product-name:
     description: 'name of GemStone product tree directory'
+  solo-extent-version:
+    description: 'GemStone version used for solo, if gemstone-version does not support solo topaz'
 runs:
   using: 'node12'
   main: 'dist/index.js'
