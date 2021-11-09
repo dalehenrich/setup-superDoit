@@ -59,6 +59,7 @@ jobs:
           ln -s ${{steps.downloadSuperDoit.outputs.gemstone-product-directory}}/${{ steps.downloadSuperDoit.outputs.solo-product-name }} ../solo/product
       # - run: ls -l ${{ steps.downloadSuperDoit.outputs.gemstone-product-directory }}/../solo
       - run: |
+          echo GEMSTONE=${{steps.downloadSuperDoit.outputs.gemstone-product-path}}
           canUSeeMe.solo -h
           canUSeeMe.solo
           versionReport.solo

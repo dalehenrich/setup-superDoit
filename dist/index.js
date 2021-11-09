@@ -13277,7 +13277,9 @@ async function run() {
 
     /* Download and extract GemStone product tree. */
 		const osPlatform = process.env.PLATFORM
+		let gemstoneProductName = ''
 		if (osPlatform == 'ubuntu-18.04') {
+			gemstoneProductName = `GemStone64Bit${version}-x86_64.Linux`
 	  	console.log(`Download and extract GemStone64Bit${version}-x86_64.Linux...`)
 			core.setOutput('gemstone-product-name', `GemStone64Bit${version}-x86_64.Linux`)
 			const productTreeZipPath = await tc.downloadTool(`https://ftp.gemtalksystems.com/GemStone64/${version}/GemStone64Bit${version}-x86_64.Linux.zip`)
@@ -13298,12 +13300,15 @@ async function run() {
 				await createSymlink(path.join(productTreeDir, `GemStone64Bit${extentVersion}-x86_64.Linux`), path.join(GEMSTONE_SOLO_DIRECTORY, 'product'))
 			}
 		} else if (osPlatform == 'macos-10.15') {
+			gemstoneProductName = `GemStone64Bit${version}-i386.Darwin`
 			core.setOutput('gemstone-product-name', `GemStone64Bit${version}-i386.Darwin`)
 			core.setOutput('solo-product-name', `GemStone64Bit${extentVersion}-i386.Darwin`)
 		} else {
 			core.setFailed(`Unsupported platform ${osPlatform}`)
 		}
 		/* Set up superDoit command */
+		const gemstoneProductPath = path.join(GEMSTONE_PRODUCTS_DIRECTORY, gemstoneProductName).
+		core.setOutput('gemstone-product-path', gemstoneProductPath)
     core.addPath(path.join(INSTALLATION_DIRECTORY, 'bin'))
 
 		/* Set up for superDoit GemStone .solo scripts */
