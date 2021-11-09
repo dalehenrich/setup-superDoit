@@ -20,7 +20,9 @@ outputs:
   gemstone-product-name:
     description: 'name of GemStone product tree directory'
   solo-extent-version:
-    description: 'GemStone version used for solo, if gemstone-version does not support solo topaz'
+    description: 'GemStone version used for solo'
+  solo-product-name:
+    description: 'name of GemStone product tree directory used for solo'
 runs:
   using: 'node12'
   main: 'dist/index.js'

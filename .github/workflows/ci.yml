@@ -27,8 +27,10 @@ jobs:
         with:
           gemstone-version: ${{matrix.gemstone}}
           superDoit-branch: 'v2.0.0-issue_24'
-      - run: echo product-version ${{ steps.downloadSuperDoit.outputs.gemstone-version }}
       - run: echo product-directory ${{ steps.downloadSuperDoit.outputs.gemstone-product-directory }}
+      - run: echo gemstone-product-name ${{ steps.downloadSuperDoit.outputs.gemstone-product-name }}
+      - run: echo gemstone-product-version ${{ steps.downloadSuperDoit.outputs.gemstone-version }}
+      - run: echo solo-product-name ${{ steps.downloadSuperDoit.outputs.solo-product-name }}
       - run: echo solo-extent-version ${{ steps.downloadSuperDoit.outputs.solo-extent-version }}
       # download GemSTone product trees for mac 
       - name: download_gemstone_for_mac
@@ -38,18 +40,18 @@ jobs:
           downloadGemStone.sh ${{ matrix.gemstone }}
       # download GemStone product trees for mac when matrix.gemstone does not support topaz solo
       - name: download_solo_gemstone_for_mac
-        if: ${{ matrix.os == 'macos-10.15' && steps.downloadSuperDoit.outputs.solo-extent-version != '' }}
+        if: ${{ (matrix.os == 'macos-10.15') && (matrix.gemstone != steps.downloadSuperDoit.outputs.solo-extent-version) }}
         run: |
           cd ${{ steps.downloadSuperDoit.outputs.gemstone-product-directory }}
           downloadGemStone.sh ${{ steps.downloadSuperDoit.outputs.solo-extent-version }}
       - run: ls -l ${{ steps.downloadSuperDoit.outputs.gemstone-product-directory }}
-     # create symbolic link for mac solo scripts to product tree for 3.6.0 and 3.6.1
+     # create symbolic link for mac solo scripts to product tree
       - name: create_solo_symbolic_link_for_mac
-        if: ${{ (matrix.os == 'macos-10.15') && ( ( matrix.gemstone =='3.6.0') || ( matrix.gemstone == '3.6.1') ) }}
+        if: ${{ (matrix.os == 'macos-10.15') }}
         run: |
           cd ${{ steps.downloadSuperDoit.outputs.gemstone-product-directory }}
-          ln -s ${{steps.downloadSuperDoit.outputs.gemstone-product-directory}}/${{ steps.downloadSuperDoit.outputs.gemstone-product-name }} ../solo/product
-
+          ln -s ${{steps.downloadSuperDoit.outputs.gemstone-product-directory}}/${{ steps.downloadSuperDoit.outputs.solo-product-name }} ../solo/product
+      - run: ls -l ${{ steps.downloadSuperDoit.outputs.gemstone-product-directory }}/../solo
       - run: |
           simple.solo -h
           simple.solo

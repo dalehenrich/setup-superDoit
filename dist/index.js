@@ -13276,19 +13276,27 @@ async function run() {
 		})
 
     /* Download and extract GemStone product tree. */
-	  console.log(`Download and extract GemStone product tree...`)
 		const osPlatform = process.env.PLATFORM
 		if (osPlatform == 'ubuntu-18.04') {
+	  	console.log(`Download and extract GemStone64Bit${version}-x86_64.Linux...`)
 			core.setOutput('gemstone-product-name', `GemStone64Bit${version}-x86_64.Linux`)
 			const productTreeZipPath = await tc.downloadTool(`https://ftp.gemtalksystems.com/GemStone64/${version}/GemStone64Bit${version}-x86_64.Linux.zip`)
     	const productTreeDir =  await tc.extractZip(productTreeZipPath, GEMSTONE_PRODUCTS_DIRECTORY)
 			if ( (version == '3.6.0') || (version == '3.6.1') ) {
-				// create symbolic link to product
+				// create symbolic link to product -- product supports solo topaz
 				console.log(`Create symoblic link for GemStone64Bit${version}-x86_64.Linux to to solo/product dir`)
 				await createSymlink(path.join(productTreeDir, `GemStone64Bit${version}-x86_64.Linux`), path.join(GEMSTONE_SOLO_DIRECTORY, 'product'))
+				core.setOutput('solo-product-name', `GemStone64Bit${extentVersion}-x86_64.Linux`)
+			} else {
+				/* Download and extract GemStone solo product tree because we need a version of GemStone that supports solo topaz */
+	  		console.log(`Download and extract solo GemStone64Bit${extentVersion}-x86_64.Linux...`)
+				core.setOutput('solo-product-name', `GemStone64Bit${extentVersion}-x86_64.Linux`)
+				const productTreeZipPath = await tc.downloadTool(`https://ftp.gemtalksystems.com/GemStone64/${version}/GemStone64Bit${extentVersion}-x86_64.Linux.zip`)
+    		const productTreeDir =  await tc.extractZip(productTreeZipPath, GEMSTONE_PRODUCTS_DIRECTORY)
 			}
 		} else if (osPlatform == 'macos-10.15') {
 			core.setOutput('gemstone-product-name', `GemStone64Bit${version}-i386.Darwin`)
+			core.setOutput('solo-product-name', `GemStone64Bit${extentVersion}-i386.Darwin`)
 		} else {
 			core.setFailed(`Unsupported platform ${osPlatform}`)
 		}
