@@ -13291,7 +13291,7 @@ async function run() {
 				/* Download and extract GemStone solo product tree because we need a version of GemStone that supports solo topaz */
 	  		console.log(`Download and extract solo GemStone64Bit${extentVersion}-x86_64.Linux...`)
 				core.setOutput('solo-product-name', `GemStone64Bit${extentVersion}-x86_64.Linux`)
-				const productTreeZipPath = await tc.downloadTool(`https://ftp.gemtalksystems.com/GemStone64/${version}/GemStone64Bit${extentVersion}-x86_64.Linux.zip`)
+				const productTreeZipPath = await tc.downloadTool(`https://ftp.gemtalksystems.com/GemStone64/${extentVersion}/GemStone64Bit${extentVersion}-x86_64.Linux.zip`)
     		const productTreeDir =  await tc.extractZip(productTreeZipPath, GEMSTONE_PRODUCTS_DIRECTORY)
 			}
 		} else if (osPlatform == 'macos-10.15') {
