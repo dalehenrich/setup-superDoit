@@ -26,7 +26,7 @@ jobs:
         uses: ./
         with:
           gemstone-version: ${{matrix.gemstone}}
-          superDoit-branch: 'v2.0.0-issue_24'
+          superDoit-branch: 'v2.0'
       - run: echo product-version ${{ steps.downloadSuperDoit.outputs.gemstone-version }} product-directory ${{ steps.downloadSuperDoit.outputs.gemstone-product-directory }}
       # download product tree for mac
       - name: download_gemstone_for_mac
