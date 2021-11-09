@@ -27,12 +27,12 @@ jobs:
         with:
           gemstone-version: ${{matrix.gemstone}}
           superDoit-branch: 'v2.0.0-issue_24'
-      - run: echo product-directory ${{ steps.downloadSuperDoit.outputs.gemstone-product-directory }}
-      - run: echo gemstone-product-name ${{ steps.downloadSuperDoit.outputs.gemstone-product-name }}
-      - run: echo gemstone-product-version ${{ steps.downloadSuperDoit.outputs.gemstone-version }}
-      - run: echo solo-product-name ${{ steps.downloadSuperDoit.outputs.solo-product-name }}
-      - run: echo solo-extent-version ${{ steps.downloadSuperDoit.outputs.solo-extent-version }}
-      # download GemSTone product trees for mac 
+      # - run: echo product-directory ${{ steps.downloadSuperDoit.outputs.gemstone-product-directory }}
+      # - run: echo gemstone-product-name ${{ steps.downloadSuperDoit.outputs.gemstone-product-name }}
+      # - run: echo gemstone-product-version ${{ steps.downloadSuperDoit.outputs.gemstone-version }}
+      # - run: echo solo-product-name ${{ steps.downloadSuperDoit.outputs.solo-product-name }}
+      # - run: echo solo-extent-version ${{ steps.downloadSuperDoit.outputs.solo-extent-version }}
+      # download GemStone product trees for mac 
       - name: download_gemstone_for_mac
         if: ${{ matrix.os == 'macos-10.15' }}
         run: |
@@ -44,7 +44,7 @@ jobs:
         run: |
           cd ${{ steps.downloadSuperDoit.outputs.gemstone-product-directory }}
           downloadGemStone.sh ${{ steps.downloadSuperDoit.outputs.solo-extent-version }}
-      - run: ls -l ${{ steps.downloadSuperDoit.outputs.gemstone-product-directory }}
+      # - run: ls -l ${{ steps.downloadSuperDoit.outputs.gemstone-product-directory }}
       # setup shared memory on mac
       - name: setup_shared_memory_for_mac
         if: ${{ matrix.os == 'macos-10.15' }}
@@ -57,7 +57,7 @@ jobs:
         run: |
           cd ${{ steps.downloadSuperDoit.outputs.gemstone-product-directory }}
           ln -s ${{steps.downloadSuperDoit.outputs.gemstone-product-directory}}/${{ steps.downloadSuperDoit.outputs.solo-product-name }} ../solo/product
-      - run: ls -l ${{ steps.downloadSuperDoit.outputs.gemstone-product-directory }}/../solo
+      # - run: ls -l ${{ steps.downloadSuperDoit.outputs.gemstone-product-directory }}/../solo
       - run: |
           canUSeeMe.solo -h
           canUSeeMe.solo
