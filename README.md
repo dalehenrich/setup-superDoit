@@ -1,4 +1,9 @@
 # setup-superDoit
+BRANCH | STATUS
+------------- | -------------
+**v2** | [![**v2** build status](https://github.com/dalehenrich/setup-superDoit/actions/workflows/ci.yml/badge.svg?branch=v2)](https://github.com/dalehenrich/setup-superDoit/actions)  [![**v2** build status](https://github.com/dalehenrich/setup-superDoit/actions/workflows/check-dist.yml/badge.svg?branch=v2)](https://github.com/dalehenrich/setup-superDoit/actions)
+
+**v2.0** | [![**v2.0** build status](https://github.com/dalehenrich/setup-superDoit/actions/workflows/ci.yml/badge.svg?branch=v2.0)](https://github.com/dalehenrich/setup-superDoit/actions)  [![**v2.0** build status](https://github.com/dalehenrich/setup-superDoit/actions/workflows/check-dist.yml/badge.svg?branch=v2.0)](https://github.com/dalehenrich/setup-superDoit/actions)
 
 ## Just enough javascript to use GemStone Smalltalk for everything else
 
