@@ -103,7 +103,7 @@ async function run() {
 			core.setFailed(`Unsupported platform ${osPlatform}`)
 		}
 		/* Set up superDoit command */
-		const gemstoneProductPath = path.join(GEMSTONE_PRODUCTS_DIRECTORY, gemstoneProductName).
+		const gemstoneProductPath = path.join(GEMSTONE_PRODUCTS_DIRECTORY, gemstoneProductName)
 		core.setOutput('gemstone-product-path', gemstoneProductPath)
     core.addPath(path.join(INSTALLATION_DIRECTORY, 'bin'))
 
