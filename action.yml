@@ -40,4 +40,5 @@ runs:
     - id: test
       run: |
         echo "superDoit installation directory: ${{ steps.downloadSuperDoitProject.outputs.installation-directory }} for ${{outputs.gemstone-version}}"
+      shell: bash
 
