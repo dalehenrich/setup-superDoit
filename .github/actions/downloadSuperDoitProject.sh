@@ -1,5 +1,6 @@
 #! /usr/bin/env bash
 
 echo "hi there"
-echo "pwd=`pwd`"
+pwd=`pwd`
+echo "$pwd"
 echo "HOME=$HOME"
