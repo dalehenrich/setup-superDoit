@@ -22,11 +22,8 @@ outputs:
 runs:
   using: "composite"
   steps:
-    - id: downloadSuperDoit
-      uses: ./.github/actions/downloadSuperDoit.sh 
-      with:
-        gemstone-version: ${{matrix.gemstone}}
-        superDoit-branch: 'v2.0.0-issue_24'
+    - run: ./.github/actions/downloadSuperDoit.sh 
+      shell: bash
     - run: |
         simple.solo -h
         simple.solo
