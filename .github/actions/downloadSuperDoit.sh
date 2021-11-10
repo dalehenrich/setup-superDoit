@@ -3,4 +3,4 @@
 
 echo "BRANCH: $superDoit_branch <=="
 export superDoit-gemstone-version=3.6.1
-echo "gemstone-version: $superDoit-gemstone-version <=="
+echo "superDoit-gemstone-version: $superDoit_gemstone_version <=="
