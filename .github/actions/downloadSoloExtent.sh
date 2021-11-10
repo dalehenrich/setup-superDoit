@@ -1,7 +1,7 @@
 #! /usr/bin/env bash
 
 set -e
-set -x
+#set -x
 
 soloExtentVersion=$superDoit_gemstone_version
 if [[ $extentVersion != '3.6.1' && $extentVersion != '3.6.0' ]] ; then

@@ -18,8 +18,6 @@ outputs:
     value: ${{ steps.downloadSuperDoitProject.outputs.gemstone-version }}
   gemstone-product-path:
     description: 'path to requested gemstone-version product tree. Suitable for use as GEMSTONE env var'
-  gemstone-product-directory:
-    description: 'directory where GemStone product tree should be installed'
   gemstone-product-name:
     description: 'name of GemStone product tree directory'
   solo-extent-version:
@@ -43,9 +41,25 @@ runs:
         export superDoit_root_dir=${{ steps.downloadSuperDoitProject.outputs.installation-directory }}
         ./.github/actions/downloadSoloExtent.sh
       shell: bash
+    - id: downloadGemStoneProductTree
+      run: |
+        export superDoit_gemstone_version=${{ inputs.gemstone-version }}
+        export superDoit_root_dir=${{ steps.downloadSuperDoitProject.outputs.installation-directory }}
+        export superDoit_solo_extent_version=${{ steps.downloadSoloExtent.outputs.solo-extent-version }}
+        ./.github/actions/downloadGemStoneProductTree.sh
+      shell: bash
     - id: test
       run: |
-        echo "superDoit installation directory: ${{ steps.downloadSuperDoitProject.outputs.installation-directory }} for ${{steps.downloadSuperDoitProject.outputs.gemstone-version}} using ${{ steps.downloadSoloExtent.outputs.solo-extent-version }}"
+        # workspace only
+        echo "superDoit root directory: ${{ steps.downloadSuperDoitProject.outputs.installation-directory }}"
+
+        # exported
+        echo "GemStone version: ${{ steps.downloadSuperDoitProject.outputs.gemstone-version }}"
+        echo "GEMSTONE: ${{ steps.downloadGemStoneProductTree.outputs.gemstone-product-path }}"
+        echo "GemStone product name: ${{steps.downloadGemStoneProductTree.outputs.gemstone-product-name}}"
+        echo "GemStone solo version: ${{ steps.downloadSoloExtent.outputs.solo-extent-version }}"
+        echo "GemStone solo product name: ${{steps.downloadGemStoneProductTree.outputs.solo-product-name}}"#
+
         ls -l ${{ steps.downloadSuperDoitProject.outputs.installation-directory }}
         ls -l ${{ steps.downloadSuperDoitProject.outputs.installation-directory }}/gemstone/solo
       shell: bash
