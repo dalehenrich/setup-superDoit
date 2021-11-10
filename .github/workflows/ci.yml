@@ -21,7 +21,6 @@ jobs:
         gemstone: [ 3.6.1 ]
     name: ${{ matrix.gemstone }} ${{ matrix.os }}
     steps:
-    steps:
       - uses: actions/checkout@v2
       - id: downloadSuperDoit
         uses: ./
