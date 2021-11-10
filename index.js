@@ -72,8 +72,8 @@ async function run() {
 		})
 
     /* Download and extract GemStone product tree. */
-	  console.log(`Preparing to download and extract GemStone ${version} for ${osPlatform}`)
 		const osPlatform = process.env.PLATFORM
+	  console.log(`Preparing to download and extract GemStone ${version} for ${osPlatform}`)
 		let gemstoneProductName = ''
 		if (osPlatform == 'ubuntu-18.04') {
 			gemstoneProductName = `GemStone64Bit${version}-x86_64.Linux`
