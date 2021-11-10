@@ -38,5 +38,5 @@ runs:
         ./.github/actions/downloadSuperDoitProject.sh
       shell: bash
     - id: test
-        echo "superDoit installation directory: ${{ steps.downloadSuperDoitProject.outputs.installation-directory }} for ${{outputs.gemstone-version}}"
+        echo "superDoit installation directory ${{ steps.downloadSuperDoitProject.outputs.installation-directory }} for ${{outputs.gemstone-version}}"
 
