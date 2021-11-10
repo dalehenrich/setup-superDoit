@@ -61,8 +61,8 @@ jobs:
       - run: |
           echo GEMSTONE=${{steps.downloadSuperDoit.outputs.gemstone-product-path}}
 
-          ls -l ${GITHUB_WORKSPACE}/gemstone/solo
-          ls -l ${GITHUB_WORKSPACE}/gemstone/products
+          ls -l ${{steps.setup-superDoit.outputs.gemstone-product-directory}}/../solo
+          ls -l ${{steps.setup-superDoit.outputs.gemstone-product-directory}}/../products
 
           canUSeeMe.solo -h
           canUSeeMe.solo
