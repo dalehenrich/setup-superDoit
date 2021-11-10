@@ -29,7 +29,8 @@ jobs:
           superDoit-branch: 'v2.0.0-issue_24'
       - name: validate_solo_setup
         run: |
-          var="${{ steps.downloadSuperDoit.outputs.gemstone-version }}"
+          var=${{ steps.downloadSuperDoit.outputs.gemstone-version }}
+          echo "gemstone-version = $var"
           simple.solo -h
           simple.solo
           versionReport.solo
