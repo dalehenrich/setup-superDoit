@@ -11,11 +11,11 @@ inputs:
   superDoit-branch:
     description: 'Branch or tag to use from superDoit repository'
     required: false
-    default: 'masterV1.0'
+    default: 'v2'
 outputs:
   gemstone-version:
     description: 'GemStone version used for stones'
-    value: ${{ steps.downloadSuperDoit.outputs.gemstone-version }}
+    value: ${{ steps.downloadSuperDoitProject.outputs.gemstone-version }}
   gemstone-product-path:
     description: 'path to requested gemstone-version product tree. Suitable for use as GEMSTONE env var'
   gemstone-product-directory:
@@ -24,7 +24,6 @@ outputs:
     description: 'name of GemStone product tree directory'
   solo-extent-version:
     description: 'GemStone version used for solo'
-    default: '3.6.1'
   solo-product-name:
     description: 'name of GemStone product tree directory used for solo'
 runs:
