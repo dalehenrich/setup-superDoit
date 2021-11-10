@@ -28,8 +28,4 @@ runs:
         ./.github/actions/downloadSuperDoit.sh
         echo "::set-output name=gemstone-version::$superDoit_gemstone_version"
       shell: bash
-    - run: |
-        simple.solo -h
-        simple.solo
-        versionReport.solo
-      shell: bash
+
