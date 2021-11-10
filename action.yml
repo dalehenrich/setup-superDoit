@@ -36,6 +36,6 @@ runs:
         export superDoit_source=${{ inputs.superDoit-source }}
         export superDoit_branch=${{ inputs.superDoit-branch }}
         ./.github/actions/downloadSuperDoitProject.sh
-      echo "superDoit installation directory: ${{ inputs.superDoit-installation-directory }}"
+        echo "superDoit installation directory: ${{ inputs.superDoit-installation-directory }}"
       shell: bash
 
