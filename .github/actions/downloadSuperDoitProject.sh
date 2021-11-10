@@ -1,5 +1,8 @@
 #! /usr/bin/env bash
 
+set -e
+set -x
+
 installation_directory="$HOME/.superDoit"
 
 if [ -d "$superDoit_source" ] ; then
