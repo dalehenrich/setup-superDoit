@@ -22,8 +22,8 @@ outputs:
 runs:
   using: "composite"
   steps:
-    - uses: ./.github/actions/setup-superDoit_js
     - id: downloadSuperDoit
+      uses: ./.github/actions/setup-superDoit_js
         uses: ./
         with:
           gemstone-version: ${{matrix.gemstone}}
