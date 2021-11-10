@@ -24,15 +24,18 @@ outputs:
     description: 'name of GemStone product tree directory'
   solo-extent-version:
     description: 'GemStone version used for solo'
+    default: '3.6.1'
   solo-product-name:
     description: 'name of GemStone product tree directory used for solo'
 runs:
   using: "composite"
   steps:
-    - id: downloadSuperDoit
+    - id: downloadSuperDoitProject
       run: |
+        export superDoit_gemstone_version=${{ inputs.gemstone-version }}
+        echo "::set-output name=gemstone-version::$superDoit_gemstone_version"
         export superDoit_source=${{ inputs.superDoit-source }}
         export superDoit_branch=${{ inputs.superDoit-branch }}
-        ./.github/actions/downloadSuperDoit.sh
+        ./.github/actions/downloadSuperDoitProject.sh
       shell: bash
 
