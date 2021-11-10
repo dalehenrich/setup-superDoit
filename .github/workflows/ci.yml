@@ -32,7 +32,7 @@ jobs:
           simple.solo -h
           simple.solo
           versionReport.solo
-      shell: bash#  slack-workflow-status:
+#  slack-workflow-status:
 #    if: always()
 #    name: Post Workflow Status To Slack
 #    needs:
