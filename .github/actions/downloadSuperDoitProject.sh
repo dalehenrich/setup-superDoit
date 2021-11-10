@@ -8,6 +8,6 @@ if [ -d "$superDoit_source" ] ; then
 	echo "::set-output name=superDoit-installation-directory::$superDoit_source"
 	exit 0
 fi
-echo "Downloading ${superDoit_source}@${superDoit_branch} to ${installation_directory}/${superDoit_source} ..."
-echo "::set-output name=superDoit-installation-directory::${installation_directory}/${superDoit_source}"
+echo "Downloading ${superDoit_source}@${superDoit_branch} to ${installation_directory}/superDoit ..."
+echo "::set-output name=superDoit-installation-directory::$installation_directory/superDoit"
 
