@@ -1,6 +1,6 @@
 #! /usr/bin/env bash
 
-source=$1
-branch=$2
-echo "downloadSuperDoit.sh $source $branch <=="
+
+echo "BRANCH: $superDoit_branch <=="
 export superDoit-gemstone-version=3.6.1
+echo "gemstone-version: $superDoit-gemstone-version <=="
