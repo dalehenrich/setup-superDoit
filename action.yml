@@ -27,6 +27,5 @@ runs:
         export superDoit_branch=${{ inputs.superDoit-branch }}
         superDoit_gemstone_version=`./.github/actions/downloadSuperDoit.sh`
         echo "OUTPUT=:$superDoit_gemstone_version"
-        echo "::set-output name=gemstone-version::$superDoit_gemstone_version"
       shell: bash
 
