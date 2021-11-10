@@ -29,8 +29,6 @@ jobs:
           superDoit-branch: 'v2.0.0-issue_24'
       - name: validate_solo_setup
         run: |
-          var=${{ steps.setup-superDoit.inputs.superDoit-branch }}
-          echo "superDoit-branch = $var"
           var=${{ steps.setup-superDoit.outputs.gemstone-version }}
           echo "gemstone-version = $var"
           simple.solo -h
