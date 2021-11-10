@@ -24,9 +24,9 @@ runs:
   steps:
     - id: downloadSuperDoit
       uses: ${{github.action.path}}/downloadSuperDoit.sh 
-        with:
-          gemstone-version: ${{matrix.gemstone}}
-          superDoit-branch: 'v2.0.0-issue_24'
+      with:
+        gemstone-version: ${{matrix.gemstone}}
+        superDoit-branch: 'v2.0.0-issue_24'
     - run: |
         simple.solo -h
         simple.solo
