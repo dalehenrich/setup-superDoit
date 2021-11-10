@@ -22,16 +22,16 @@ jobs:
     name: ${{ matrix.gemstone }} ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
-      - id: downloadSuperDoit
+      - id: setup-superDoit
         uses: ./
         with:
           gemstone-version: ${{matrix.gemstone}}
           superDoit-branch: 'v2.0.0-issue_24'
       - name: validate_solo_setup
         run: |
-          var=${{ steps.downloadSuperDoit.inputs.superDoit-branch }}
+          var=${{ steps.setup-superDoit.inputs.superDoit-branch }}
           echo "superDoit-branch = $var"
-          var=${{ steps.downloadSuperDoit.outputs.gemstone-version }}
+          var=${{ steps.setup-superDoit.outputs.gemstone-version }}
           echo "gemstone-version = $var"
           simple.solo -h
           simple.solo
