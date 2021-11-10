@@ -4,6 +4,7 @@ set -e
 set -x
 
 installation_directory="$HOME/.superDoit"
+mkdir $installation_directory
 
 if [ -d "$superDoit_source" ] ; then
 	"directory exists so no need to download the project"
