@@ -22,7 +22,7 @@ outputs:
 runs:
   using: "composite"
   steps:
-    - run: ./.github/actions/downloadSuperDoit.sh 
+    - run: ./.github/actions/downloadSuperDoit.sh ${{ inputs.superDoit-source }} ${{ inputs.superDoit-branch }}
       shell: bash
     - run: |
         simple.solo -h

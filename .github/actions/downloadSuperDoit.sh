@@ -1,3 +1,5 @@
 #! /usr/bin/env bash
 
-echo downloadSuperDoit.sh ${{ inputs.superDoit-source }} ${{ inputs.superDoit-branch }}
+source=$1
+branch=$2
+echo "downloadSuperDoit.sh $source $branch <=="
