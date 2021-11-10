@@ -15,17 +15,16 @@ inputs:
 outputs:
   gemstone-version:
     description: 'GemStone version selection'
+  gemstone-product-path:
+    description: 'path to requested gemstone-version product tree. Suitable for use as GEMSTONE env var'
   gemstone-product-directory:
     description: 'directory where GemStone product tree should be installed'
   gemstone-product-name:
     description: 'name of GemStone product tree directory'
+  solo-extent-version:
+    description: 'GemStone version used for solo'
+  solo-product-name:
+    description: 'name of GemStone product tree directory used for solo'
 runs:
-  using: "composite"
-  steps:
-    - uses: ./.github/actions/setup-superDoit_js
-    - id: downloadSuperDoit
-        uses: ./
-        with:
-          gemstone-version: ${{matrix.gemstone}}
-          superDoit-branch: 'v2.0.0-issue_24'
-
+  using: 'node12'
+  main: 'dist/index.js'

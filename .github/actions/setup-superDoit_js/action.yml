@@ -20,12 +20,5 @@ outputs:
   gemstone-product-name:
     description: 'name of GemStone product tree directory'
 runs:
-  using: "composite"
-  steps:
-    - uses: ./.github/actions/setup-superDoit_js
-    - id: downloadSuperDoit
-        uses: ./
-        with:
-          gemstone-version: ${{matrix.gemstone}}
-          superDoit-branch: 'v2.0.0-issue_24'
-
+  using: 'node12'
+  main: '../../../dist/index.js'
