@@ -22,7 +22,11 @@ outputs:
 runs:
   using: "composite"
   steps:
-    - run: ./.github/actions/downloadSuperDoit.sh ${{ inputs.superDoit-source }} ${{ inputs.superDoit-branch }}
+    - run: |
+        export superDoit-source=${{ inputs.superDoit-source }}
+        export superDoit-branch=${{ inputs.superDoit-branch }}
+        ./.github/actions/downloadSuperDoit.sh
+        echo "::set-output name=gemston-version::$superDoit-gemstone-version"
       shell: bash
     - run: |
         simple.solo -h

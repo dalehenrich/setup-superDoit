@@ -27,6 +27,7 @@ jobs:
         with:
           gemstone-version: ${{matrix.gemstone}}
           superDoit-branch: 'v2.0.0-issue_24'
+      - run: echo ${{ steps.downloadSuperDoit.outputs.gemstone-version }}
 #  slack-workflow-status:
 #    if: always()
 #    name: Post Workflow Status To Slack
