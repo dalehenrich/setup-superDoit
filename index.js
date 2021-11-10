@@ -72,6 +72,7 @@ async function run() {
 		})
 
     /* Download and extract GemStone product tree. */
+	  console.log(`Preparing to download and extract GemStone ${version} for ${osPlatform}`)
 		const osPlatform = process.env.PLATFORM
 		let gemstoneProductName = ''
 		if (osPlatform == 'ubuntu-18.04') {
@@ -96,6 +97,7 @@ async function run() {
 				await createSymlink(path.join(productTreeDir, `GemStone64Bit${extentVersion}-x86_64.Linux`), path.join(GEMSTONE_SOLO_DIRECTORY, 'product'))
 			}
 		} else if (osPlatform == 'macos-10.15') {
+			console.log(`deferring download of ${version} for ${osPlatform}`)
 			gemstoneProductName = `GemStone64Bit${version}-i386.Darwin`
 			core.setOutput('gemstone-product-name', `GemStone64Bit${version}-i386.Darwin`)
 			core.setOutput('solo-product-name', `GemStone64Bit${extentVersion}-i386.Darwin`)
