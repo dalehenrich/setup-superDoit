@@ -45,7 +45,7 @@ runs:
       shell: bash
     - id: test
       run: |
-        echo "superDoit installation directory: ${{ steps.downloadSuperDoitProject.outputs.installation-directory }} for ${{steps.downloadSuperDoitProject.outputs.gemstone-version}}"
+        echo "superDoit installation directory: ${{ steps.downloadSuperDoitProject.outputs.installation-directory }} for ${{steps.downloadSuperDoitProject.outputs.gemstone-version}} using ${{ steps.downloadSoloExtent.outputs.solo-extent-version }}"
         ls -l ${{ steps.downloadSuperDoitProject.outputs.installation-directory }}
         ls -l ${{ steps.downloadSuperDoitProject.outputs.installation-directory }}/gemstone/solo
       shell: bash
