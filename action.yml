@@ -26,8 +26,6 @@ outputs:
     description: 'GemStone version used for solo'
   solo-product-name:
     description: 'name of GemStone product tree directory used for solo'
-  installation-directory:
-    description: 'path to the superDoit project installation'
 runs:
   using: "composite"
   steps:
@@ -38,6 +36,7 @@ runs:
         export superDoit_source=${{ inputs.superDoit-source }}
         export superDoit_branch=${{ inputs.superDoit-branch }}
         ./.github/actions/downloadSuperDoitProject.sh
-        echo "superDoit installation directory: ${{ steps.downloadSuperDoitProject.outputs.installation-directory }}"
       shell: bash
+    - id: test
+        echo "superDoit installation directory: ${{ steps.downloadSuperDoitProject.outputs.installation-directory }} for ${{outputs.gemstone-version}}"
 
