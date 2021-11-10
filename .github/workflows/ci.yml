@@ -30,10 +30,9 @@ jobs:
       - name: validate_solo_setup
         run: |
           var=${{ steps.setup-superDoit.outputs.gemstone-version }}
-          echo "gemstone-version = $var"
-          simple.solo -h
-          simple.solo
-          versionReport.solo
+          #simple.solo -h
+          #simple.solo
+          #versionReport.solo
 #  slack-workflow-status:
 #    if: always()
 #    name: Post Workflow Status To Slack
