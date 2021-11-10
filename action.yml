@@ -37,9 +37,16 @@ runs:
         export superDoit_branch=${{ inputs.superDoit-branch }}
         ./.github/actions/downloadSuperDoitProject.sh
       shell: bash
+    - id: downloadSoloExtent
+      run: |
+        export superDoit_gemstone_version=${{ inputs.gemstone-version }}
+        export superDoit_root_dir=${{ steps.downloadSuperDoitProject.outputs.installation-directory }}
+        ./.github/actions/downloadSoloExtent.sh
+      shell: bash
     - id: test
       run: |
         echo "superDoit installation directory: ${{ steps.downloadSuperDoitProject.outputs.installation-directory }} for ${{steps.downloadSuperDoitProject.outputs.gemstone-version}}"
         ls -l ${{ steps.downloadSuperDoitProject.outputs.installation-directory }}
+        ls -l ${{ steps.downloadSuperDoitProject.outputs.installation-directory }}/gemstone/solo
       shell: bash
 

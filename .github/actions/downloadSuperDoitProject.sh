@@ -1,7 +1,7 @@
 #! /usr/bin/env bash
 
 set -e
-set -x
+#set -x
 
 installation_directory="$HOME/.superDoit"
 mkdir $installation_directory
