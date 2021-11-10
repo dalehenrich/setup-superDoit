@@ -12,9 +12,9 @@ if [ -d "$superDoit_source" ] ; then
 	echo "::set-output name=installation-directory::$superDoit_source"
 	exit 0
 fi
-echo "Downloading ${superDoit_source}@${superDoit_branch} to ${installation_directory}/superDoit ..."
+echo "Downloading ${superDoit_source}@${superDoit_branch} to ${installation_directory} ..."
 
-curl -s -S -L https://github.com/${superDoit_source}/archive/${superDoit_branch}.tar.gz | tar xvz -C $installation_directory
+curl -s -S -L https://github.com/${superDoit_source}/archive/${superDoit_branch}.tar.gz | tar xvz -C $installation_directory --strip-components 1
 
-echo "::set-output name=installation-directory::$installation_directory/superDoit"
+echo "::set-output name=installation-directory::$installation_directory"
 
