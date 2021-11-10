@@ -21,10 +21,9 @@ jobs:
         gemstone: [ 3.6.1 ]
     name: ${{ matrix.gemstone }} ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v2
-      - uses: ./.github/actions/setup-superDoit_js 
+      - uses: actions/checkout@v2  
       - id: downloadSuperDoit
-        uses: ./
+        uses: ./.github/actions/setup-superDoit_js
         with:
           gemstone-version: ${{matrix.gemstone}}
           superDoit-branch: 'v2.0.0-issue_24'
