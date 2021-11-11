@@ -23,6 +23,7 @@ if [ "$superDoit_gemstone_version" != "$superDoit_solo_extent_version" ] ; then
 fi
 
 echo "create solo product symbolic link for $superDoit_solo_extent_version ..."
-ln -s $productName ../solo/product
+cd ../solo
+ln -s ../products/$productName product
 echo "::set-output name=solo-product-name::$productName"
 
