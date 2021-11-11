@@ -56,7 +56,6 @@ jobs:
             fi
           fi
           # run some solo scripts
-          . ${{ steps.setup-superDoit.outputs.superDoit-root }}/dev/defPath.env
           export PATH=${{ steps.setup-superDoit.outputs.superDoit-root }}/examples/simple:$PATH
           simple.solo -h
           simple.solo

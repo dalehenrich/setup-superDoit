@@ -54,6 +54,8 @@ runs:
         export superDoit_root_dir=${{ steps.downloadSuperDoitProject.outputs.superDoit-root }}
         export superDoit_solo_extent_version=${{ steps.downloadSoloExtent.outputs.solo-extent-version }}
         ${{ github.action_path }}/.github/actions/downloadGemStoneProductTree.sh
+
+        . ${{ steps.downloadSuperDoitProject.outputs.superDoit-root }}/dev/defPath.env
       shell: bash
     - id: test
       run: |
