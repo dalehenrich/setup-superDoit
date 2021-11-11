@@ -4,9 +4,9 @@ set -e
 #set -x
 
 if [ "$PLATFORM" = "macos-10.15" ] ; then
-	productExtension="-i386.Darwin"
+	productExtension="i386.Darwin"
 else
-	productExtension="-x86_64.Linux"
+	productExtension="x86_64.Linux"
 fi
 
 cd ${superDoit_root_dir}/gemstone/products
