@@ -35,6 +35,7 @@ jobs:
           echo "GemStone product name: ${{steps.setup-superDoit.outputs.gemstone-product-name}}"
           echo "GemStone solo version: ${{ steps.setup-superDoit.outputs.solo-extent-version }}"
           echo "GemStone solo product name: ${{steps.setup-superDoit.outputs.solo-product-name}}"
+          export PATH=${{ steps.setup-superDoit.outputs.superDoit-root }}/examples/utility:${{ steps.setup-superDoit.outputs.superDoit-root }}/examples/simple:$PATH
           simple.solo -h
           simple.solo
           versionReport.solo
