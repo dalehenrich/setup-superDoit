@@ -61,6 +61,7 @@ runs:
         echo "GemStone solo product name: ${{steps.downloadGemStoneProductTree.outputs.solo-product-name}}"#
 
         ls -l ${{ steps.downloadSuperDoitProject.outputs.installation-directory }}
+        ls -l ${{ steps.downloadSuperDoitProject.outputs.installation-directory }}/gemstone/products
         ls -l ${{ steps.downloadSuperDoitProject.outputs.installation-directory }}/gemstone/solo
       shell: bash
 
