@@ -40,9 +40,28 @@ jobs:
           ls -l ${{ steps.setup-superDoit.outputs.superDoit-root }}
           ls -l ${{ steps.setup-superDoit.outputs.superDoit-root }}/gemstone/products
           ls -l ${{ steps.setup-superDoit.outputs.superDoit-root }}/gemstone/solo
+          if [ "${{ steps.setup-superDoit.outputs.gemstone-version }}" = '3.6.1' ] ; then
+            if [ "${{ steps.setup-superDoit.outputs.solo-extent-version }}" != '3.6.1' ] ; then
+              echo "Expected solo version (${{ steps.setup-superDoit.outputs.solo-extent-version }}) to be 3.6.1"
+              exit 1
+            fi
+          elif [ "${{ steps.setup-superDoit.outputs.gemstone-version }}" = '3.6.0' ] ; then
+            if [ "${{ steps.setup-superDoit.outputs.solo-extent-version }}" != '3.6.0' ] ; then
+              echo "Expected solo version (${{ steps.setup-superDoit.outputs.solo-extent-version }}) to be 3.6.0"
+              exit 1
+            fi
+          else
+            if [ "${{ steps.setup-superDoit.outputs.solo-extent-version }}" != '3.6.1' ] ; then
+              # 3.6.1 is the default if gemstone version does not support topaz solo
+              echo "Expected solo version (${{ steps.setup-superDoit.outputs.solo-extent-version }}) to be 3.6.1"
+              exit 1
+            fi
+          fi
+          # run some solo scripts
           simple.solo -h
           simple.solo
           versionReport.solo
+
 #  slack-workflow-status:
 #    if: always()
 #    name: Post Workflow Status To Slack
