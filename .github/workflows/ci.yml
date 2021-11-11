@@ -29,10 +29,18 @@ jobs:
           superDoit-branch: 'v2.0.0-issue_24'
       - name: validate_solo_setup
         run: |
-          var=${{ steps.setup-superDoit.outputs.gemstone-version }}
-          #simple.solo -h
-          #simple.solo
-          #versionReport.solo
+          echo "superDoit project root: ${{ steps.setup-superDoit.outputs.superDoit-root }}"
+          echo "GemStone version: ${{ steps.setup-superDoit.outputs.gemstone-version }}"
+          echo "GEMSTONE: ${{ steps.setup-superDoit.outputs.gemstone-product-path }}"
+          echo "GemStone product name: ${{steps.setup-superDoit.outputs.gemstone-product-name}}"
+          echo "GemStone solo version: ${{ steps.setup-superDoit.outputs.solo-extent-version }}"
+          echo "GemStone solo product name: ${{steps.setup-superDoit.outputs.solo-product-name}}"
+          simple.solo -h
+          simple.solo
+          versionReport.solo
+          ls -l ${{ steps.setup-superDoit.outputs.superDoit-root }}
+          ls -l ${{ steps.setup-superDoit.outputs.superDoit-root }}/gemstone/products
+          ls -l ${{ steps.setup-superDoit.outputs.superDoit-root }}/gemstone/solo
 #  slack-workflow-status:
 #    if: always()
 #    name: Post Workflow Status To Slack

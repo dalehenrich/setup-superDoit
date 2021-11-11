@@ -24,6 +24,8 @@ outputs:
     description: 'GemStone version used for solo'
   solo-product-name:
     description: 'name of GemStone product tree directory used for solo'
+  superDoit-root:
+    description: 'root directory of the downloaded superDoit project'
 runs:
   using: "composite"
   steps:
@@ -50,18 +52,16 @@ runs:
       shell: bash
     - id: test
       run: |
-        # workspace only
-        echo "superDoit root directory: ${{ steps.downloadSuperDoitProject.outputs.installation-directory }}"
-
         # exported
+        echo "superDoit root directory: ${{ steps.downloadSuperDoitProject.outputs.superDoit-root }}"
         echo "GemStone version: ${{ steps.downloadSuperDoitProject.outputs.gemstone-version }}"
         echo "GEMSTONE: ${{ steps.downloadGemStoneProductTree.outputs.gemstone-product-path }}"
         echo "GemStone product name: ${{steps.downloadGemStoneProductTree.outputs.gemstone-product-name}}"
         echo "GemStone solo version: ${{ steps.downloadSoloExtent.outputs.solo-extent-version }}"
-        echo "GemStone solo product name: ${{steps.downloadGemStoneProductTree.outputs.solo-product-name}}"#
+        echo "GemStone solo product name: ${{steps.downloadGemStoneProductTree.outputs.solo-product-name}}"
 
-        ls -l ${{ steps.downloadSuperDoitProject.outputs.installation-directory }}
-        ls -l ${{ steps.downloadSuperDoitProject.outputs.installation-directory }}/gemstone/products
-        ls -l ${{ steps.downloadSuperDoitProject.outputs.installation-directory }}/gemstone/solo
+        ls -l ${{ steps.downloadSuperDoitProject.outputs.superDoit-root }}
+        ls -l ${{ steps.downloadSuperDoitProject.outputs.superDoit-root }}/gemstone/products
+        ls -l ${{ steps.downloadSuperDoitProject.outputs.superDoit-root }}/gemstone/solo
       shell: bash
 

@@ -1,7 +1,7 @@
 #! /usr/bin/env bash
 
 set -e
-set -x
+#set -x
 
 if [ "$PLATFORM" = "macos-10.15" ] ; then
 	productExtension="-i386.Darwin"
