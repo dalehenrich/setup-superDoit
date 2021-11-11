@@ -40,13 +40,13 @@ runs:
     - id: downloadSoloExtent
       run: |
         export superDoit_gemstone_version=${{ inputs.gemstone-version }}
-        export superDoit_root_dir=${{ steps.downloadSuperDoitProject.outputs.installation-directory }}
+        export superDoit_root_dir=${{ steps.downloadSuperDoitProject.outputs.superDoit-root }}
         ./.github/actions/downloadSoloExtent.sh
       shell: bash
     - id: downloadGemStoneProductTree
       run: |
         export superDoit_gemstone_version=${{ inputs.gemstone-version }}
-        export superDoit_root_dir=${{ steps.downloadSuperDoitProject.outputs.installation-directory }}
+        export superDoit_root_dir=${{ steps.downloadSuperDoitProject.outputs.superDoit-root }}
         export superDoit_solo_extent_version=${{ steps.downloadSoloExtent.outputs.solo-extent-version }}
         ./.github/actions/downloadGemStoneProductTree.sh
       shell: bash
