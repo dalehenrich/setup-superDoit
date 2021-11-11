@@ -41,8 +41,8 @@ runs:
         export superDoit_source=${{ inputs.superDoit-source }}
         export superDoit_branch=${{ inputs.superDoit-branch }}
         pwd
-        echo _actions/*
-        ls -al ${GITHUB_WORKSPACE}/../../_actions/*
+        echo _actions/dalehenrich
+        ls -al ${GITHUB_WORKSPACE}/../../_actions/dalehenrich
         echo _actions
         ls -al ${GITHUB_WORKSPACE}/../../_actions
         echo ..
