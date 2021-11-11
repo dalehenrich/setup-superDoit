@@ -41,10 +41,10 @@ runs:
         export superDoit_source=${{ inputs.superDoit-source }}
         export superDoit_branch=${{ inputs.superDoit-branch }}
         pwd
-        ls -l ${GITHUB_WORKSPACE}/../../_actions
-        ls -l ${GITHUB_WORKSPACE}/..
-        ls -l ${GITHUB_WORKSPACE}
-        ls -l .
+        ls -al ${GITHUB_WORKSPACE}/../../_actions
+        ls -al ${GITHUB_WORKSPACE}/..
+        ls -al ${GITHUB_WORKSPACE}
+        ls -al .
         ./.github/actions/downloadSuperDoitProject.sh
       shell: bash
     - id: downloadSoloExtent
