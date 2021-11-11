@@ -4,7 +4,7 @@ set -e
 #set -x
 
 soloExtentVersion=$superDoit_gemstone_version
-if [[ $extentVersion != '3.6.1' && $extentVersion != '3.6.0' ]] ; then
+if [[ $soloExtentVersion != '3.6.1' && $soloExtentVersion != '3.6.0' ]] ; then
 	soloExtentVersion='3.6.1'
 fi
 

@@ -19,7 +19,7 @@ echo "::set-output name=gemstone-product-path::${superDoit_root_dir}/gemstone/pr
 if [ "$superDoit_gemstone_version" != "$superDoit_solo_extent_version" ] ; then
 	echo "Downloading solo product tree for $superDoit_solo_extent_version ..."
 	${superDoit_root_dir}/dev/downloadGemStone.sh $superDoit_solo_extent_version
-	productName=GemStone64Bit${solo_extent_version}-${productExtension}
+	productName=GemStone64Bit${superDoit_solo_extent_version}-${productExtension}
 fi
 
 echo "create solo product symbolic link for $superDoit_solo_extent_version ..."
