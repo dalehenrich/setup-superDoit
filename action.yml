@@ -11,14 +11,62 @@ inputs:
   superDoit-branch:
     description: 'Branch or tag to use from superDoit repository'
     required: false
-    default: 'masterV1.0'
+    default: 'v2'
 outputs:
   gemstone-version:
-    description: 'GemStone version selection'
-  gemstone-product-directory:
-    description: 'directory where GemStone product tree should be installed'
+    description: 'GemStone version used for stones'
+    value: ${{ steps.downloadSuperDoitProject.outputs.gemstone-version }}
+  gemstone-product-path:
+    description: 'path to requested gemstone-version product tree. Suitable for use as GEMSTONE env var'
+    value: ${{ steps.downloadGemStoneProductTree.outputs.gemstone-product-path }}
   gemstone-product-name:
     description: 'name of GemStone product tree directory'
+    value: ${{steps.downloadGemStoneProductTree.outputs.gemstone-product-name}}
+  solo-extent-version:
+    description: 'GemStone version used for solo'
+    value: ${{ steps.downloadSoloExtent.outputs.solo-extent-version }}
+  solo-product-name:
+    description: 'name of GemStone product tree directory used for solo'
+    value: ${{steps.downloadGemStoneProductTree.outputs.solo-product-name}}
+  superDoit-root:
+    description: 'root directory of the downloaded superDoit project'
+    value: ${{ steps.downloadSuperDoitProject.outputs.superDoit-root }}
 runs:
-  using: 'node12'
-  main: 'dist/index.js'
+  using: "composite"
+  steps:
+    - id: downloadSuperDoitProject
+      run: |
+        export superDoit_gemstone_version=${{ inputs.gemstone-version }}
+        echo "::set-output name=gemstone-version::$superDoit_gemstone_version"
+        export superDoit_source=${{ inputs.superDoit-source }}
+        export superDoit_branch=${{ inputs.superDoit-branch }}
+        ./.github/actions/downloadSuperDoitProject.sh
+      shell: bash
+    - id: downloadSoloExtent
+      run: |
+        export superDoit_gemstone_version=${{ inputs.gemstone-version }}
+        export superDoit_root_dir=${{ steps.downloadSuperDoitProject.outputs.superDoit-root }}
+        ./.github/actions/downloadSoloExtent.sh
+      shell: bash
+    - id: downloadGemStoneProductTree
+      run: |
+        export superDoit_gemstone_version=${{ inputs.gemstone-version }}
+        export superDoit_root_dir=${{ steps.downloadSuperDoitProject.outputs.superDoit-root }}
+        export superDoit_solo_extent_version=${{ steps.downloadSoloExtent.outputs.solo-extent-version }}
+        ./.github/actions/downloadGemStoneProductTree.sh
+      shell: bash
+    - id: test
+      run: |
+        # exported
+        echo "superDoit root directory: ${{ steps.downloadSuperDoitProject.outputs.superDoit-root }}"
+        echo "GemStone version: ${{ steps.downloadSuperDoitProject.outputs.gemstone-version }}"
+        echo "GEMSTONE: ${{ steps.downloadGemStoneProductTree.outputs.gemstone-product-path }}"
+        echo "GemStone product name: ${{steps.downloadGemStoneProductTree.outputs.gemstone-product-name}}"
+        echo "GemStone solo version: ${{ steps.downloadSoloExtent.outputs.solo-extent-version }}"
+        echo "GemStone solo product name: ${{steps.downloadGemStoneProductTree.outputs.solo-product-name}}"
+
+        ls -l ${{ steps.downloadSuperDoitProject.outputs.superDoit-root }}
+        ls -l ${{ steps.downloadSuperDoitProject.outputs.superDoit-root }}/gemstone/products
+        ls -l ${{ steps.downloadSuperDoitProject.outputs.superDoit-root }}/gemstone/solo
+      shell: bash
+

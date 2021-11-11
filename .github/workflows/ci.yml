@@ -16,35 +16,52 @@ jobs:
     strategy:
       matrix:
         # os: [ ubuntu-18.04, macos-10.15 ]
-        # gemstone: [ 3.6.1, 3.6.0 ]
-        os: [ macos-10.15 ]
-        gemstone: [ 3.6.1 ]
+        # gemstone: [ 3.6.1, 3.6.0, 3.5.7 ]
+        os: [ ubuntu-18.04, macos-10.15 ]
+        gemstone: [ 3.6.1, 3.6.0, 3.5.7 ]
     name: ${{ matrix.gemstone }} ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
-      - id: downloadSuperDoit
+      - id: setup-superDoit
         uses: ./
         with:
           gemstone-version: ${{matrix.gemstone}}
-          superDoit-branch: 'v2.0'
-      - run: echo product-version ${{ steps.downloadSuperDoit.outputs.gemstone-version }} product-directory ${{ steps.downloadSuperDoit.outputs.gemstone-product-directory }}
-      # download product tree for mac
-      - name: download_gemstone_for_mac
-        if: ${{ matrix.os == 'macos-10.15' }}
+          superDoit-branch: 'v2.0.0-issue_24'
+      - name: validate_solo_setup
         run: |
-          cd ${{ steps.downloadSuperDoit.outputs.gemstone-product-directory }}
-          downloadGemStone.sh ${{ matrix.gemstone }}
-     # create symbolic link for mac solo scripts to product tree for 3.6.0 and 3.6.1
-      - name: create_solo_symbolic_link_for_mac
-        if: ${{ (matrix.os == 'macos-10.15') && ( ( matrix.gemstone =='3.6.0') || ( matrix.gemstone == '3.6.1') ) }}
-        run: |
-          cd ${{ steps.downloadSuperDoit.outputs.gemstone-product-directory }}
-          ln -s ${{steps.downloadSuperDoit.outputs.gemstone-product-directory}}/${{ steps.downloadSuperDoit.outputs.gemstone-product-name }} ../solo/product
-
-      - run: |
+          echo "superDoit project root: ${{ steps.setup-superDoit.outputs.superDoit-root }}"
+          echo "GemStone version: ${{ steps.setup-superDoit.outputs.gemstone-version }}"
+          echo "GEMSTONE: ${{ steps.setup-superDoit.outputs.gemstone-product-path }}"
+          echo "GemStone product name: ${{steps.setup-superDoit.outputs.gemstone-product-name}}"
+          echo "GemStone solo version: ${{ steps.setup-superDoit.outputs.solo-extent-version }}"
+          echo "GemStone solo product name: ${{steps.setup-superDoit.outputs.solo-product-name}}"
+          ls -l ${{ steps.setup-superDoit.outputs.superDoit-root }}
+          ls -l ${{ steps.setup-superDoit.outputs.superDoit-root }}/gemstone/products
+          ls -l ${{ steps.setup-superDoit.outputs.superDoit-root }}/gemstone/solo
+          if [ "${{ steps.setup-superDoit.outputs.gemstone-version }}" = '3.6.1' ] ; then
+            if [ "${{ steps.setup-superDoit.outputs.solo-extent-version }}" != '3.6.1' ] ; then
+              echo "Expected solo version (${{ steps.setup-superDoit.outputs.solo-extent-version }}) to be 3.6.1"
+              exit 1
+            fi
+          elif [ "${{ steps.setup-superDoit.outputs.gemstone-version }}" = '3.6.0' ] ; then
+            if [ "${{ steps.setup-superDoit.outputs.solo-extent-version }}" != '3.6.0' ] ; then
+              echo "Expected solo version (${{ steps.setup-superDoit.outputs.solo-extent-version }}) to be 3.6.0"
+              exit 1
+            fi
+          else
+            if [ "${{ steps.setup-superDoit.outputs.solo-extent-version }}" != '3.6.1' ] ; then
+              # 3.6.1 is the default if gemstone version does not support topaz solo
+              echo "Expected solo version (${{ steps.setup-superDoit.outputs.solo-extent-version }}) to be 3.6.1"
+              exit 1
+            fi
+          fi
+          # run some solo scripts
+          . ${{ steps.setup-superDoit.outputs.superDoit-root }}/dev/defPath.env
+          export PATH=${{ steps.setup-superDoit.outputs.superDoit-root }}/examples/simple:$PATH
           simple.solo -h
           simple.solo
           versionReport.solo
+
 #  slack-workflow-status:
 #    if: always()
 #    name: Post Workflow Status To Slack
