@@ -40,31 +40,20 @@ runs:
         echo "::set-output name=gemstone-version::$superDoit_gemstone_version"
         export superDoit_source=${{ inputs.superDoit-source }}
         export superDoit_branch=${{ inputs.superDoit-branch }}
-        pwd
-        echo ${{ github.action_path }}
-        echo _actions/dalehenrich
-        ls -al ${GITHUB_WORKSPACE}/../../_actions/dalehenrich
-        echo _actions
-        ls -al ${GITHUB_WORKSPACE}/../../_actions
-        echo ..
-        ls -al ${GITHUB_WORKSPACE}/..
-        echo .
-        ls -al ${GITHUB_WORKSPACE}
-        ls -al .
-        ./.github/actions/downloadSuperDoitProject.sh
+        ${{ github.action_path }}/.github/actions/downloadSuperDoitProject.sh
       shell: bash
     - id: downloadSoloExtent
       run: |
         export superDoit_gemstone_version=${{ inputs.gemstone-version }}
         export superDoit_root_dir=${{ steps.downloadSuperDoitProject.outputs.superDoit-root }}
-        ./.github/actions/downloadSoloExtent.sh
+        ${{ github.action_path }}/.github/actions/downloadSoloExtent.sh
       shell: bash
     - id: downloadGemStoneProductTree
       run: |
         export superDoit_gemstone_version=${{ inputs.gemstone-version }}
         export superDoit_root_dir=${{ steps.downloadSuperDoitProject.outputs.superDoit-root }}
         export superDoit_solo_extent_version=${{ steps.downloadSoloExtent.outputs.solo-extent-version }}
-        ./.github/actions/downloadGemStoneProductTree.sh
+        ${{ github.action_path }}/.github/actions/downloadGemStoneProductTree.sh
       shell: bash
     - id: test
       run: |
