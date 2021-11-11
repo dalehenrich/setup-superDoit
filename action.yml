@@ -58,8 +58,8 @@ runs:
     - id: setup_shared_memory_on_mac
       run: |
         if [ "$PLATFORM" = "macos-10.15" ] ; then
-	        echo "-- set up shared memory on Mac"
-	        ${superDoit_root_dir}/dev/setSharedMemory.sh
+          echo "-- set up shared memory on Mac"
+          ${superDoit_root_dir}/dev/setSharedMemory.sh
         fi
       shell: bash
     - id: test
