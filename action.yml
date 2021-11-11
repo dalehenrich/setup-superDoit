@@ -40,6 +40,8 @@ runs:
         echo "::set-output name=gemstone-version::$superDoit_gemstone_version"
         export superDoit_source=${{ inputs.superDoit-source }}
         export superDoit_branch=${{ inputs.superDoit-branch }}
+        pwd
+        ls -l .
         ./.github/actions/downloadSuperDoitProject.sh
       shell: bash
     - id: downloadSoloExtent
