@@ -59,7 +59,7 @@ runs:
       run: |
         if [ "$PLATFORM" = "macos-10.15" ] ; then
           echo "-- set up shared memory on Mac"
-          ${superDoit_root_dir}/dev/setSharedMemory.sh
+          ${{ steps.downloadSuperDoitProject.outputs.superDoit-root }}/dev/setSharedMemory.sh
         fi
       shell: bash
     - id: test
