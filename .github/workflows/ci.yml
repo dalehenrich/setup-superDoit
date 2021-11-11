@@ -35,8 +35,6 @@ jobs:
           echo "GemStone product name: ${{steps.setup-superDoit.outputs.gemstone-product-name}}"
           echo "GemStone solo version: ${{ steps.setup-superDoit.outputs.solo-extent-version }}"
           echo "GemStone solo product name: ${{steps.setup-superDoit.outputs.solo-product-name}}"
-          . ${{ steps.setup-superDoit.outputs.superDoit-root }}/dev/defPath.env
-          export PATH=${{ steps.setup-superDoit.outputs.superDoit-root }}/examples/simple:$PATH
           ls -l ${{ steps.setup-superDoit.outputs.superDoit-root }}
           ls -l ${{ steps.setup-superDoit.outputs.superDoit-root }}/gemstone/products
           ls -l ${{ steps.setup-superDoit.outputs.superDoit-root }}/gemstone/solo
@@ -58,6 +56,8 @@ jobs:
             fi
           fi
           # run some solo scripts
+          . ${{ steps.setup-superDoit.outputs.superDoit-root }}/dev/defPath.env
+          export PATH=${{ steps.setup-superDoit.outputs.superDoit-root }}/examples/simple:$PATH
           simple.solo -h
           simple.solo
           versionReport.solo
