@@ -41,8 +41,13 @@ runs:
         export superDoit_source=${{ inputs.superDoit-source }}
         export superDoit_branch=${{ inputs.superDoit-branch }}
         pwd
+        echo _actions/*
+        ls -al ${GITHUB_WORKSPACE}/../../_actions/*
+        echo _actions
         ls -al ${GITHUB_WORKSPACE}/../../_actions
+        echo ..
         ls -al ${GITHUB_WORKSPACE}/..
+        echo .
         ls -al ${GITHUB_WORKSPACE}
         ls -al .
         ./.github/actions/downloadSuperDoitProject.sh
