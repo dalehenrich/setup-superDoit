@@ -7,7 +7,7 @@ installation_directory="$HOME/.superDoit"
 mkdir $installation_directory
 
 if [ -d "$superDoit_source" ] ; then
-	"directory exists so no need to download the project"
+	# directory exists so no need to download the project
 	echo "using existing superDoit directory $superDoit_source"
 	echo "::set-output name=superDoit-root::$superDoit_source"
 	exit 0
