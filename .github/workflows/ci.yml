@@ -37,12 +37,12 @@ jobs:
           echo "GemStone solo product name: ${{steps.setup-superDoit.outputs.solo-product-name}}"
           . ${{ steps.setup-superDoit.outputs.superDoit-root }}/dev/defPath.env
           export PATH=${{ steps.setup-superDoit.outputs.superDoit-root }}/examples/simple:$PATH
-          simple.solo -h
-          simple.solo
-          versionReport.solo
           ls -l ${{ steps.setup-superDoit.outputs.superDoit-root }}
           ls -l ${{ steps.setup-superDoit.outputs.superDoit-root }}/gemstone/products
           ls -l ${{ steps.setup-superDoit.outputs.superDoit-root }}/gemstone/solo
+          simple.solo -h
+          simple.solo
+          versionReport.solo
 #  slack-workflow-status:
 #    if: always()
 #    name: Post Workflow Status To Slack
