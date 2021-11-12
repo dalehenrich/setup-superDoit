@@ -27,7 +27,7 @@ jobs:
         with:
           gemstone-version: ${{matrix.gemstone}}
           superDoit-branch: 'v2.0.0-issue_24'
-      - name: validate_solo_setup
+      - name: validate_superDoit_setup
         run: |
           echo "GemStone version: ${{ steps.setup-superDoit.outputs.gemstone-version }}"
           echo "GEMSTONE: ${{ steps.setup-superDoit.outputs.gemstone-product-path }}"
@@ -46,7 +46,7 @@ jobs:
           ls -al ${{ steps.setup-superDoit.outputs.superDoit-root }}
           ls -al ${{ steps.setup-superDoit.outputs.superDoit-root }}/gemstone/products
           ls -al ${{ steps.setup-superDoit.outputs.superDoit-root }}/gemstone/solo
-          ls -al ${{ steps.setup-superDoit.outputs.stone-directory }}/gemstone/solo
+          ls -al ${{ steps.setup-superDoit.outputs.stone-directory }}
           if [ "${{ steps.setup-superDoit.outputs.gemstone-version }}" = '3.6.1' ] ; then
             if [ "${{ steps.setup-superDoit.outputs.solo-extent-version }}" != '3.6.1' ] ; then
               echo "Expected solo version (${{ steps.setup-superDoit.outputs.solo-extent-version }}) to be 3.6.1"
