@@ -93,4 +93,4 @@ runs:
         export superDoit_gemstone_version=${{ inputs.gemstone-version }}
         export superDoit_root_dir=${{ steps.downloadSuperDoitProject.outputs.superDoit-root }}
         ${{ github.action_path }}/.github/actions/downloadSoloExtent.sh
-      shell:bash
+      shell: bash
