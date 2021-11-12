@@ -80,7 +80,7 @@ runs:
         export GEMSTONE_VERSION=${{ steps.downloadSuperDoitProject.outputs.gemstone-version }}
         export GEMSTONE_STONE_NAME=gs_$GEMSTONE_VERSION
         echo "::set-output name=stone-name::$GEMSTONE_STONE_NAME"
-        export GEMSTONE_STONE_DIR=${{ steps.downloadSuperDoitProject.outputs.superDoit-root }}/gemstone/stones/GEMSTONE_STONE_NAME
+        export GEMSTONE_STONE_DIR=${{ steps.downloadSuperDoitProject.outputs.superDoit-root }}/gemstone/stones/$GEMSTONE_STONE_NAME
         echo "::set-output name=stone-directory::$GEMSTONE_STONE_DIR"
         echo "::set-output name=topazini-path::$GEMSTONE_STONE_DIR/.topazini"
         export SUPERDOIT_ROOT=${{ steps.downloadSuperDoitProject.outputs.superDoit-root }}
