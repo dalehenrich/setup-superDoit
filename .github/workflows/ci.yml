@@ -43,9 +43,13 @@ jobs:
 
           echo "superDoit project root: ${{ steps.setup-superDoit.outputs.superDoit-root }}"
 
+          echo ${{ steps.setup-superDoit.outputs.superDoit-root }}
           ls -al ${{ steps.setup-superDoit.outputs.superDoit-root }}
+          echo ${{ steps.setup-superDoit.outputs.superDoit-root }}/gemstone/products
           ls -al ${{ steps.setup-superDoit.outputs.superDoit-root }}/gemstone/products
+          echo ${{ steps.setup-superDoit.outputs.superDoit-root }}/gemstone/solo
           ls -al ${{ steps.setup-superDoit.outputs.superDoit-root }}/gemstone/solo
+          echo ${{ steps.setup-superDoit.outputs.stone-directory }}
           ls -al ${{ steps.setup-superDoit.outputs.stone-directory }}
           if [ "${{ steps.setup-superDoit.outputs.gemstone-version }}" = '3.6.1' ] ; then
             if [ "${{ steps.setup-superDoit.outputs.solo-extent-version }}" != '3.6.1' ] ; then
@@ -76,6 +80,8 @@ jobs:
           # .stone scripts
           export GEMSTONE=${{ steps.setup-superDoit.outputs.gemstone-product-path }}
           export TOPAZINI_PATH=${{steps.setup-superDoit.outputs.topazini-path}}
+
+          $GEMSTONE/bin/gslist -lc
 
           echo "GEMSTONE=$GEMSTONE"
           echo "TOPAZINI_PATH=$TOPAZINI_PATH"
