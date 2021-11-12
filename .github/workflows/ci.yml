@@ -52,7 +52,7 @@ jobs:
           echo ${{ steps.setup-superDoit.outputs.stone-directory }}
           ls -al ${{ steps.setup-superDoit.outputs.stone-directory }}
           if [ "${{ steps.setup-superDoit.outputs.gemstone-version }}" = '3.6.1' ] ; then
-            if [ "${{ steps.setup-superDoit.outputs.extent-version }}" != '3.6.1' ] ; then
+            if [ "${{ steps.setup-superDoit.outputs.solo-version }}" != '3.6.1' ] ; then
               echo "Expected solo version (${{ steps.setup-superDoit.outputs.solo-version }}) to be 3.6.1"
               exit 1
             fi
