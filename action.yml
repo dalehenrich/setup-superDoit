@@ -39,7 +39,7 @@ outputs:
     value: ${{ steps.downloadSoloExtent.outputs.solo-version }}
   solo-product-name:
     description: 'name of GemStone product tree directory used for solo'
-    value: ${{steps.setup_and_start_stone.outputs.stone-name}}
+    value: ${{steps.setup_and_start_stone.outputs.solo-product-name}}
   superDoit-root:
     description: 'root directory of the downloaded superDoit project'
     value: ${{ steps.downloadSuperDoitProject.outputs.superDoit-root }}
