@@ -22,12 +22,24 @@ outputs:
   gemstone-product-name:
     description: 'name of GemStone product tree directory'
     value: ${{steps.downloadGemStoneProductTree.outputs.gemstone-product-name}}
+  stone-directory:
+    description: 'directory where stone is running'
+    value: ${{steps.setup_and_start_stone.outputs.stone-directory}}
+  topazini-path:
+    description: 'location of the default .topazini file'
+    value: ${{steps.setup_and_start_stone.outputs.topazini-path}}
+  stone-name:
+    description: 'name of the stone'
+    value: ${{steps.setup_and_start_stone.outputs.stone-name}}
+  stone-system-conf-path:
+    description: 'path to sysmtem.conf file'
+    value: ${{steps.setup_and_start_stone.outputs.stone-system-conf-path}}
   solo-extent-version:
     description: 'GemStone version used for solo'
     value: ${{ steps.downloadSoloExtent.outputs.solo-extent-version }}
   solo-product-name:
     description: 'name of GemStone product tree directory used for solo'
-    value: ${{steps.downloadGemStoneProductTree.outputs.solo-product-name}}
+    value: ${{steps.setup_and_start_stone.outputs.stone-name}}
   superDoit-root:
     description: 'root directory of the downloaded superDoit project'
     value: ${{ steps.downloadSuperDoitProject.outputs.superDoit-root }}
@@ -62,6 +74,26 @@ runs:
           ${{ steps.downloadSuperDoitProject.outputs.superDoit-root }}/dev/setSharedMemory.sh
         fi
       shell: bash
+    - id: setup_and_start_stone
+      run: |
+        export GEMSTONE=${{ steps.downloadGemStoneProductTree.outputs.gemstone-product-path }}
+        export GEMSTONE_VERSION=${{ steps.downloadSuperDoitProject.outputs.gemstone-version }}
+        export GEMSTONE_STONE_NAME=gs_$GEMSTONE_VERSION
+        echo "::set-output name=stone-name::$GEMSTONE_STONE_NAME"
+        export GEMSTONE_STONE_DIR=${{ steps.downloadSuperDoitProject.outputs.superDoit-root }}/gemstone/stones/GEMSTONE_STONE_NAME
+        echo "::set-output name=stone-directory::$GEMSTONE_STONE_DIR"
+        echo "::set-output name=topazini-path::$GEMSTONE_STONE_DIR/.topazini"
+        export SUPERDOIT_ROOT=${{ steps.downloadSuperDoitProject.outputs.superDoit-root }}
+        export GEMSTONE_SYSTEM_CONF=$GEMSTONE_STONE_DIR/system.conf
+        echo "::set-output name=stone-system-conf-path::$GEMSTONE_SYSTEM_CONF"
+        ${{ github.action_path }}/.github/actions/setupAndStartStone.sh
+      shell: bash
+    - id: downloadSoloExtent
+      run: |
+        export superDoit_gemstone_version=${{ inputs.gemstone-version }}
+        export superDoit_root_dir=${{ steps.downloadSuperDoitProject.outputs.superDoit-root }}
+        ${{ github.action_path }}/.github/actions/downloadSoloExtent.sh
+      shell:bash
     - id: test
       run: |
         # exported
@@ -71,9 +103,14 @@ runs:
         echo "GemStone product name: ${{steps.downloadGemStoneProductTree.outputs.gemstone-product-name}}"
         echo "GemStone solo version: ${{ steps.downloadSoloExtent.outputs.solo-extent-version }}"
         echo "GemStone solo product name: ${{steps.downloadGemStoneProductTree.outputs.solo-product-name}}"
+        echo "Stone directory: ${{steps.setup_and_start_stone.outputs.stone-directory}}"
+        echo ".topazini path: ${{steps.setup_and_start_stone.outputs.topazini-path}}"
+        echo "Stone name: ${{steps.setup_and_start_stone.outputs.Stone directory}}"
+        echo "Stone system.conf file: ${{steps.setup_and_start_stone.outputs.stone-system-conf-path}}"
 
-        ls -l ${{ steps.downloadSuperDoitProject.outputs.superDoit-root }}
-        ls -l ${{ steps.downloadSuperDoitProject.outputs.superDoit-root }}/gemstone/products
-        ls -l ${{ steps.downloadSuperDoitProject.outputs.superDoit-root }}/gemstone/solo
+        ls -al ${{ steps.downloadSuperDoitProject.outputs.superDoit-root }}
+        ls -al ${{ steps.downloadSuperDoitProject.outputs.superDoit-root }}/gemstone/products
+        ls -al ${{ steps.downloadSuperDoitProject.outputs.superDoit-root }}/gemstone/solo
+        ls -al ${{ steps.setup_and_start_stone.outputs.stone-directory }}
       shell: bash
 
