@@ -94,23 +94,3 @@ runs:
         export superDoit_root_dir=${{ steps.downloadSuperDoitProject.outputs.superDoit-root }}
         ${{ github.action_path }}/.github/actions/downloadSoloExtent.sh
       shell:bash
-    - id: test
-      run: |
-        # exported
-        echo "superDoit root directory: ${{ steps.downloadSuperDoitProject.outputs.superDoit-root }}"
-        echo "GemStone version: ${{ steps.downloadSuperDoitProject.outputs.gemstone-version }}"
-        echo "GEMSTONE: ${{ steps.downloadGemStoneProductTree.outputs.gemstone-product-path }}"
-        echo "GemStone product name: ${{steps.downloadGemStoneProductTree.outputs.gemstone-product-name}}"
-        echo "GemStone solo version: ${{ steps.downloadSoloExtent.outputs.solo-extent-version }}"
-        echo "GemStone solo product name: ${{steps.downloadGemStoneProductTree.outputs.solo-product-name}}"
-        echo "Stone directory: ${{steps.setup_and_start_stone.outputs.stone-directory}}"
-        echo ".topazini path: ${{steps.setup_and_start_stone.outputs.topazini-path}}"
-        echo "Stone name: ${{steps.setup_and_start_stone.outputs.Stone directory}}"
-        echo "Stone system.conf file: ${{steps.setup_and_start_stone.outputs.stone-system-conf-path}}"
-
-        ls -al ${{ steps.downloadSuperDoitProject.outputs.superDoit-root }}
-        ls -al ${{ steps.downloadSuperDoitProject.outputs.superDoit-root }}/gemstone/products
-        ls -al ${{ steps.downloadSuperDoitProject.outputs.superDoit-root }}/gemstone/solo
-        ls -al ${{ steps.setup_and_start_stone.outputs.stone-directory }}
-      shell: bash
-
