@@ -38,7 +38,7 @@ jobs:
           echo "Stone name: ${{steps.setup-superDoit.outputs.stone-name}}"
           echo "system.conf path: ${{steps.setup-superDoit.outputs.stone-system-conf-path}}"
 
-          echo "GemStone solo version: ${{ steps.setup-superDoit.outputs.solo-extent-version }}"
+          echo "GemStone solo version: ${{ steps.setup-superDoit.outputs.solo-version }}"
           echo "GemStone solo product name: ${{steps.setup-superDoit.outputs.solo-product-name}}"
 
           echo "superDoit project root: ${{ steps.setup-superDoit.outputs.superDoit-root }}"
@@ -52,19 +52,19 @@ jobs:
           echo ${{ steps.setup-superDoit.outputs.stone-directory }}
           ls -al ${{ steps.setup-superDoit.outputs.stone-directory }}
           if [ "${{ steps.setup-superDoit.outputs.gemstone-version }}" = '3.6.1' ] ; then
-            if [ "${{ steps.setup-superDoit.outputs.solo-extent-version }}" != '3.6.1' ] ; then
-              echo "Expected solo version (${{ steps.setup-superDoit.outputs.solo-extent-version }}) to be 3.6.1"
+            if [ "${{ steps.setup-superDoit.outputs.extent-version }}" != '3.6.1' ] ; then
+              echo "Expected solo version (${{ steps.setup-superDoit.outputs.solo-version }}) to be 3.6.1"
               exit 1
             fi
           elif [ "${{ steps.setup-superDoit.outputs.gemstone-version }}" = '3.6.0' ] ; then
-            if [ "${{ steps.setup-superDoit.outputs.solo-extent-version }}" != '3.6.0' ] ; then
-              echo "Expected solo version (${{ steps.setup-superDoit.outputs.solo-extent-version }}) to be 3.6.0"
+            if [ "${{ steps.setup-superDoit.outputs.solo-version }}" != '3.6.0' ] ; then
+              echo "Expected solo version (${{ steps.setup-superDoit.outputs.solo-version }}) to be 3.6.0"
               exit 1
             fi
           else
-            if [ "${{ steps.setup-superDoit.outputs.solo-extent-version }}" != '3.6.1' ] ; then
+            if [ "${{ steps.setup-superDoit.outputs.solo-version }}" != '3.6.1' ] ; then
               # 3.6.1 is the default if gemstone version does not support topaz solo
-              echo "Expected solo version (${{ steps.setup-superDoit.outputs.solo-extent-version }}) to be 3.6.1"
+              echo "Expected solo version (${{ steps.setup-superDoit.outputs.solo-version }}) to be 3.6.1"
               exit 1
             fi
           fi

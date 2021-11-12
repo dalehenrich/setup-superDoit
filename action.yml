@@ -34,9 +34,9 @@ outputs:
   stone-system-conf-path:
     description: 'path to sysmtem.conf file'
     value: ${{steps.setup_and_start_stone.outputs.stone-system-conf-path}}
-  solo-extent-version:
+  solo-version:
     description: 'GemStone version used for solo'
-    value: ${{ steps.downloadSoloExtent.outputs.solo-extent-version }}
+    value: ${{ steps.downloadSoloExtent.outputs.solo-version }}
   solo-product-name:
     description: 'name of GemStone product tree directory used for solo'
     value: ${{steps.setup_and_start_stone.outputs.stone-name}}
@@ -64,7 +64,7 @@ runs:
       run: |
         export superDoit_gemstone_version=${{ inputs.gemstone-version }}
         export superDoit_root_dir=${{ steps.downloadSuperDoitProject.outputs.superDoit-root }}
-        export superDoit_solo_extent_version=${{ steps.downloadSoloExtent.outputs.solo-extent-version }}
+        export superDoit_solo_version=${{ steps.downloadSoloExtent.outputs.solo-version }}
         ${{ github.action_path }}/.github/actions/downloadGemStoneProductTree.sh
       shell: bash
     - id: setup_shared_memory_on_mac
