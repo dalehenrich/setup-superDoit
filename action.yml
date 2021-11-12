@@ -88,9 +88,3 @@ runs:
         echo "::set-output name=stone-system-conf-path::$GEMSTONE_SYSTEM_CONF"
         ${{ github.action_path }}/.github/actions/setupAndStartStone.sh
       shell: bash
-    - id: downloadSoloExtent
-      run: |
-        export superDoit_gemstone_version=${{ inputs.gemstone-version }}
-        export superDoit_root_dir=${{ steps.downloadSuperDoitProject.outputs.superDoit-root }}
-        ${{ github.action_path }}/.github/actions/downloadSoloExtent.sh
-      shell: bash
