@@ -22,9 +22,21 @@ outputs:
   gemstone-product-name:
     description: 'name of GemStone product tree directory'
     value: ${{steps.downloadGemStoneProductTree.outputs.gemstone-product-name}}
-  solo-extent-version:
+  stone-directory:
+    description: 'directory where stone is running'
+    value: ${{steps.setup_and_start_stone.outputs.stone-directory}}
+  topazini-path:
+    description: 'location of the default .topazini file'
+    value: ${{steps.setup_and_start_stone.outputs.topazini-path}}
+  stone-name:
+    description: 'name of the stone'
+    value: ${{steps.setup_and_start_stone.outputs.stone-name}}
+  stone-system-conf-path:
+    description: 'path to sysmtem.conf file'
+    value: ${{steps.setup_and_start_stone.outputs.stone-system-conf-path}}
+  solo-version:
     description: 'GemStone version used for solo'
-    value: ${{ steps.downloadSoloExtent.outputs.solo-extent-version }}
+    value: ${{ steps.downloadSoloExtent.outputs.solo-version }}
   solo-product-name:
     description: 'name of GemStone product tree directory used for solo'
     value: ${{steps.downloadGemStoneProductTree.outputs.solo-product-name}}
@@ -40,33 +52,39 @@ runs:
         echo "::set-output name=gemstone-version::$superDoit_gemstone_version"
         export superDoit_source=${{ inputs.superDoit-source }}
         export superDoit_branch=${{ inputs.superDoit-branch }}
-        ./.github/actions/downloadSuperDoitProject.sh
+        ${{ github.action_path }}/.github/actions/downloadSuperDoitProject.sh
       shell: bash
     - id: downloadSoloExtent
       run: |
         export superDoit_gemstone_version=${{ inputs.gemstone-version }}
         export superDoit_root_dir=${{ steps.downloadSuperDoitProject.outputs.superDoit-root }}
-        ./.github/actions/downloadSoloExtent.sh
+        ${{ github.action_path }}/.github/actions/downloadSoloExtent.sh
       shell: bash
     - id: downloadGemStoneProductTree
       run: |
         export superDoit_gemstone_version=${{ inputs.gemstone-version }}
         export superDoit_root_dir=${{ steps.downloadSuperDoitProject.outputs.superDoit-root }}
-        export superDoit_solo_extent_version=${{ steps.downloadSoloExtent.outputs.solo-extent-version }}
-        ./.github/actions/downloadGemStoneProductTree.sh
+        export superDoit_solo_version=${{ steps.downloadSoloExtent.outputs.solo-version }}
+        ${{ github.action_path }}/.github/actions/downloadGemStoneProductTree.sh
       shell: bash
-    - id: test
+    - id: setup_shared_memory_on_mac
       run: |
-        # exported
-        echo "superDoit root directory: ${{ steps.downloadSuperDoitProject.outputs.superDoit-root }}"
-        echo "GemStone version: ${{ steps.downloadSuperDoitProject.outputs.gemstone-version }}"
-        echo "GEMSTONE: ${{ steps.downloadGemStoneProductTree.outputs.gemstone-product-path }}"
-        echo "GemStone product name: ${{steps.downloadGemStoneProductTree.outputs.gemstone-product-name}}"
-        echo "GemStone solo version: ${{ steps.downloadSoloExtent.outputs.solo-extent-version }}"
-        echo "GemStone solo product name: ${{steps.downloadGemStoneProductTree.outputs.solo-product-name}}"
-
-        ls -l ${{ steps.downloadSuperDoitProject.outputs.superDoit-root }}
-        ls -l ${{ steps.downloadSuperDoitProject.outputs.superDoit-root }}/gemstone/products
-        ls -l ${{ steps.downloadSuperDoitProject.outputs.superDoit-root }}/gemstone/solo
+        if [ "$PLATFORM" = "macos-10.15" ] ; then
+          echo "-- set up shared memory on Mac"
+          ${{ steps.downloadSuperDoitProject.outputs.superDoit-root }}/dev/setSharedMemory.sh
+        fi
       shell: bash
-
+    - id: setup_and_start_stone
+      run: |
+        export GEMSTONE=${{ steps.downloadGemStoneProductTree.outputs.gemstone-product-path }}
+        export GEMSTONE_VERSION=${{ steps.downloadSuperDoitProject.outputs.gemstone-version }}
+        export GEMSTONE_STONE_NAME=gs_$GEMSTONE_VERSION
+        echo "::set-output name=stone-name::$GEMSTONE_STONE_NAME"
+        export GEMSTONE_STONE_DIR=${{ steps.downloadSuperDoitProject.outputs.superDoit-root }}/gemstone/stones/$GEMSTONE_STONE_NAME
+        echo "::set-output name=stone-directory::$GEMSTONE_STONE_DIR"
+        echo "::set-output name=topazini-path::$GEMSTONE_STONE_DIR/.topazini"
+        export SUPERDOIT_ROOT=${{ steps.downloadSuperDoitProject.outputs.superDoit-root }}
+        export GEMSTONE_SYSTEM_CONF=$GEMSTONE_STONE_DIR/system.conf
+        echo "::set-output name=stone-system-conf-path::$GEMSTONE_SYSTEM_CONF"
+        ${{ github.action_path }}/.github/actions/setupAndStartStone.sh
+      shell: bash

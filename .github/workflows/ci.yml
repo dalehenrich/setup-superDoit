@@ -27,41 +27,67 @@ jobs:
         with:
           gemstone-version: ${{matrix.gemstone}}
           superDoit-branch: 'v2.0.0-issue_24'
-      - name: validate_solo_setup
+      - name: validate_superDoit_setup
         run: |
-          echo "superDoit project root: ${{ steps.setup-superDoit.outputs.superDoit-root }}"
           echo "GemStone version: ${{ steps.setup-superDoit.outputs.gemstone-version }}"
           echo "GEMSTONE: ${{ steps.setup-superDoit.outputs.gemstone-product-path }}"
           echo "GemStone product name: ${{steps.setup-superDoit.outputs.gemstone-product-name}}"
-          echo "GemStone solo version: ${{ steps.setup-superDoit.outputs.solo-extent-version }}"
+
+          echo "Stone directory: ${{steps.setup-superDoit.outputs.stone-directory}}"
+          echo ".topazini path: ${{steps.setup-superDoit.outputs.topazini-path}}"
+          echo "Stone name: ${{steps.setup-superDoit.outputs.stone-name}}"
+          echo "system.conf path: ${{steps.setup-superDoit.outputs.stone-system-conf-path}}"
+
+          echo "GemStone solo version: ${{ steps.setup-superDoit.outputs.solo-version }}"
           echo "GemStone solo product name: ${{steps.setup-superDoit.outputs.solo-product-name}}"
-          ls -l ${{ steps.setup-superDoit.outputs.superDoit-root }}
-          ls -l ${{ steps.setup-superDoit.outputs.superDoit-root }}/gemstone/products
-          ls -l ${{ steps.setup-superDoit.outputs.superDoit-root }}/gemstone/solo
+
+          echo "superDoit project root: ${{ steps.setup-superDoit.outputs.superDoit-root }}"
+
+          echo ${{ steps.setup-superDoit.outputs.superDoit-root }}
+          ls -al ${{ steps.setup-superDoit.outputs.superDoit-root }}
+          echo ${{ steps.setup-superDoit.outputs.superDoit-root }}/gemstone/products
+          ls -al ${{ steps.setup-superDoit.outputs.superDoit-root }}/gemstone/products
+          echo ${{ steps.setup-superDoit.outputs.superDoit-root }}/gemstone/solo
+          ls -al ${{ steps.setup-superDoit.outputs.superDoit-root }}/gemstone/solo
+          echo ${{ steps.setup-superDoit.outputs.stone-directory }}
+          ls -al ${{ steps.setup-superDoit.outputs.stone-directory }}
           if [ "${{ steps.setup-superDoit.outputs.gemstone-version }}" = '3.6.1' ] ; then
-            if [ "${{ steps.setup-superDoit.outputs.solo-extent-version }}" != '3.6.1' ] ; then
-              echo "Expected solo version (${{ steps.setup-superDoit.outputs.solo-extent-version }}) to be 3.6.1"
+            if [ "${{ steps.setup-superDoit.outputs.solo-version }}" != '3.6.1' ] ; then
+              echo "Expected solo version (${{ steps.setup-superDoit.outputs.solo-version }}) to be 3.6.1"
               exit 1
             fi
           elif [ "${{ steps.setup-superDoit.outputs.gemstone-version }}" = '3.6.0' ] ; then
-            if [ "${{ steps.setup-superDoit.outputs.solo-extent-version }}" != '3.6.0' ] ; then
-              echo "Expected solo version (${{ steps.setup-superDoit.outputs.solo-extent-version }}) to be 3.6.0"
+            if [ "${{ steps.setup-superDoit.outputs.solo-version }}" != '3.6.0' ] ; then
+              echo "Expected solo version (${{ steps.setup-superDoit.outputs.solo-version }}) to be 3.6.0"
               exit 1
             fi
           else
-            if [ "${{ steps.setup-superDoit.outputs.solo-extent-version }}" != '3.6.1' ] ; then
+            if [ "${{ steps.setup-superDoit.outputs.solo-version }}" != '3.6.1' ] ; then
               # 3.6.1 is the default if gemstone version does not support topaz solo
-              echo "Expected solo version (${{ steps.setup-superDoit.outputs.solo-extent-version }}) to be 3.6.1"
+              echo "Expected solo version (${{ steps.setup-superDoit.outputs.solo-version }}) to be 3.6.1"
               exit 1
             fi
           fi
-          # run some solo scripts
+          # run some superdoit scripts
           . ${{ steps.setup-superDoit.outputs.superDoit-root }}/dev/defPath.env
           export PATH=${{ steps.setup-superDoit.outputs.superDoit-root }}/examples/simple:$PATH
+
+          # .solo scripts
           simple.solo -h
           simple.solo
           versionReport.solo
 
+          # .stone scripts
+          export GEMSTONE=${{ steps.setup-superDoit.outputs.gemstone-product-path }}
+          export TOPAZINI_PATH=${{steps.setup-superDoit.outputs.topazini-path}}
+
+          echo gslist OUTPUT
+          $GEMSTONE/bin/gslist -lc
+
+          simple.stone -h -- -l -I $TOPAZINI_PATH
+          simple.stone -- -l -I $TOPAZINI_PATH
+
+          simple.topaz -l -I $TOPAZINI_PATH
 #  slack-workflow-status:
 #    if: always()
 #    name: Post Workflow Status To Slack
