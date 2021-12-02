@@ -64,7 +64,7 @@ outputs:
     steps:
       - uses: actions/checkout@v2
       - id: setup-superDoit
-        uses: dalehenrich/setup-superDoit@v2.0
+        uses: dalehenrich/setup-superDoit@v2
         with:
           gemstone-version: ${{ matrix.gsvers }}
           superDoit-source: ${{ github.workspace }}
