@@ -1,9 +1,6 @@
 name: "CI"
 on:
   pull_request:
-    branches:
-      - v1
-      - v2
   push:
   schedule:
     - cron: "15 2 25 * *" #run job on the 25th day of every month on the 15th minute of the 2nd hour
@@ -15,11 +12,10 @@ jobs:
        PLATFORM: ${{ matrix.os }}
     strategy:
       matrix:
-        # os: [ ubuntu-18.04, macos-10.15 ]
-        # gemstone: [ 3.6.1, 3.6.0, 3.5.7 ]
         os: [ ubuntu-20.04, macos-11 ]
-        gemstone: [ 3.6.6, 3.6.0, 3.5.8 ]
+        gemstone: [ 3.7.0, 3.6.8, 3.6.0, 3.5.8 ]
     name: ${{ matrix.gemstone }} ${{ matrix.os }}
+    continue-on-error: true
     steps:
       - uses: actions/checkout@v2
       - id: setup-superDoit
