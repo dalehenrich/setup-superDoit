@@ -14,5 +14,5 @@ curl -s -S -L https://github.com/dalehenrich/superDoit/releases/download/v0.1.0/
 
 chmod 444 $superDoit_root_dir/gemstone/solo/extent0.solo.dbf
 
-echo "::set-output name=solo-version::$soloExtentVersion"
+echo "solo-version=$soloExtentVersion" >> $GITHUB_OUTPUT
 

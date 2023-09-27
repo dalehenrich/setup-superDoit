@@ -25,5 +25,5 @@ fi
 echo "create solo product symbolic link for $superDoit_solo_version ..."
 cd ../solo
 ln -s ../products/$productName product
-echo "::set-output name=solo-product-name::$productName"
+echo "solo-product-name=$productName" >> $GITHUB_OUTPUT
 
