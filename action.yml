@@ -49,7 +49,7 @@ runs:
     - id: downloadSuperDoitProject
       run: |
         export superDoit_gemstone_version=${{ inputs.gemstone-version }}
-        echo "::set-output name=gemstone-version::$superDoit_gemstone_version"
+        echo "gemstone-version=$superDoit_gemstone_version" >> $GITHUB_OUTPUT
         export superDoit_source=${{ inputs.superDoit-source }}
         export superDoit_branch=${{ inputs.superDoit-branch }}
         ${{ github.action_path }}/.github/actions/downloadSuperDoitProject.sh
@@ -79,12 +79,12 @@ runs:
         export GEMSTONE=${{ steps.downloadGemStoneProductTree.outputs.gemstone-product-path }}
         export GEMSTONE_VERSION=${{ steps.downloadSuperDoitProject.outputs.gemstone-version }}
         export GEMSTONE_STONE_NAME=gs_$GEMSTONE_VERSION
-        echo "::set-output name=stone-name::$GEMSTONE_STONE_NAME"
+        echo "stone-name=$GEMSTONE_STONE_NAME" >> $GITHUB_OUTPUT
         export GEMSTONE_STONE_DIR=${{ steps.downloadSuperDoitProject.outputs.superDoit-root }}/gemstone/stones/$GEMSTONE_STONE_NAME
-        echo "::set-output name=stone-directory::$GEMSTONE_STONE_DIR"
-        echo "::set-output name=topazini-path::$GEMSTONE_STONE_DIR/.topazini"
+        echo "stone-directory=$GEMSTONE_STONE_DIR" >> $GITHUB_OUTPUT
+        echo "topazini-path=$GEMSTONE_STONE_DIR/.topazini" >> $GITHUB_OUTPUT
         export SUPERDOIT_ROOT=${{ steps.downloadSuperDoitProject.outputs.superDoit-root }}
         export GEMSTONE_SYSTEM_CONF=$GEMSTONE_STONE_DIR/system.conf
-        echo "::set-output name=stone-system-conf-path::$GEMSTONE_SYSTEM_CONF"
+        echo "stone-system-conf-path=$GEMSTONE_SYSTEM_CONF" >> $GITHUB_OUTPUT
         ${{ github.action_path }}/.github/actions/setupAndStartStone.sh
       shell: bash
