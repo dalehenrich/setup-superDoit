@@ -15,7 +15,6 @@ jobs:
         os: [ ubuntu-20.04, macos-latest ]
         gemstone: [ 3.7.0, 3.6.6, 3.6.0, 3.5.8 ]
     name: ${{ matrix.gemstone }} ${{ matrix.os }}
-    continue-on-error: true
     steps:
       - uses: actions/checkout@v2
       - id: setup-superDoit
