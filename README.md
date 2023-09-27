@@ -1,105 +1,24 @@
 # setup-superDoit
 BRANCH | STATUS
 ------------- | -------------
+**v4.1** | [![**v4.1** build status](https://github.com/dalehenrich/setup-superDoit/actions/workflows/ci.yml/badge.svg?branch=v4.1)](https://github.com/dalehenrich/setup-superDoit/actions)
 **v2** | [![**v2** build status](https://github.com/dalehenrich/setup-superDoit/actions/workflows/ci.yml/badge.svg?branch=v2)](https://github.com/dalehenrich/setup-superDoit/actions)
-**v2.0** | [![**v2.0** build status](https://github.com/dalehenrich/setup-superDoit/actions/workflows/ci.yml/badge.svg?branch=v2.0)](https://github.com/dalehenrich/setup-superDoit/actions)
+
+## Versions
+### v4.1
+Intended for .solo scripts used with versions of GemStone that are shipped with an extent0.rowan.dbf in $GEMSTONE/bin, GemStone 3.6.4 and newer versions of GemStone (currently tested thru 3.6.5). 
+
+Should be used with superDoit branch v3.1 and later. 
+
+.stone scripts may be used with GemStone versions as old as 3.4.0.
+
+### v2
+Intended for use with older versions of GemStone: 3.6.1, 3.6.0, 3.5.8, 3.5.0 (tested versions)
 
 This GitHub Action sets up [superDoit] for using [superDoit] scripts in GitHub Actions.
 After running setup-superDoit, the system is setup to run .solo, .stone, and .topaz scripts.
 A stone is started for the give `gemstone-version` output and the `topazini-path` output points at the .topazini file for the stone.
 
-## Usage
-
-### action.yml def
-```yml
-name: 'Setup superDoit'
-description: 'Setup superDoit for running GemStone Smalltalk scripts: .stone, .solo, and .topaz'
-author: 'Dale Henrichs, GemTalk Systems'
-inputs:
-  gemstone-version:
-    description: 'Version of GemStone to use when running scripts'
-  superDoit-source:
-    description: 'GigHub slug of the superDoit source repository'
-    required: false
-    default: 'dalehenrich/superDoit'
-  superDoit-branch:
-    description: 'Branch or tag to use from superDoit repository'
-    required: false
-    default: 'v2'
-outputs:
-  gemstone-version:
-    description: 'GemStone version used for stones'
-    value: ${{ steps.downloadSuperDoitProject.outputs.gemstone-version }}
-  gemstone-product-path:
-    description: 'path to requested gemstone-version product tree. Suitable for use as GEMSTONE env var'
-    value: ${{ steps.downloadGemStoneProductTree.outputs.gemstone-product-path }}
-  gemstone-product-name:
-    description: 'name of GemStone product tree directory'
-    value: ${{steps.downloadGemStoneProductTree.outputs.gemstone-product-name}}
-  stone-directory:
-    description: 'directory where stone is running'
-    value: ${{steps.setup_and_start_stone.outputs.stone-directory}}
-  topazini-path:
-    description: 'location of the default .topazini file'
-    value: ${{steps.setup_and_start_stone.outputs.topazini-path}}
-  stone-name:
-    description: 'name of the stone'
-    value: ${{steps.setup_and_start_stone.outputs.stone-name}}
-  stone-system-conf-path:
-    description: 'path to sysmtem.conf file'
-    value: ${{steps.setup_and_start_stone.outputs.stone-system-conf-path}}
-  solo-version:
-    description: 'GemStone version used for solo'
-    value: ${{ steps.downloadSoloExtent.outputs.solo-version }}
-  solo-product-name:
-    description: 'name of GemStone product tree directory used for solo'
-    value: ${{steps.downloadGemStoneProductTree.outputs.solo-product-name}}
-  superDoit-root:
-    description: 'root directory of the downloaded superDoit project'
-    value: ${{ steps.downloadSuperDoitProject.outputs.superDoit-root }}
-```
-### Basic
-
-```yaml
-    steps:
-      - uses: actions/checkout@v2
-      - id: setup-superDoit
-        uses: dalehenrich/setup-superDoit@v2
-        with:
-          gemstone-version: ${{ matrix.gsvers }}
-          superDoit-source: ${{ github.workspace }}
-```
-
-### Testing Different GemStone versions
-
-```yaml
-jobs:
-  build:
-    strategy:
-      matrix:
-        gemstone: [ 3.6.0, 3.6.1 ]
-    name: ${{ matrix.gemstone }}
-    steps:
-      - uses: actions/checkout@v2
-      - id: setup-superDoit
-        uses: dalehenrich/setup-superDoit@v2.0
-        with:
-          gemstone-version: ${{ matrix.gsvers }}
-          superDoit-source: ${{ github.workspace }}
-```
-
-### Use a different branch or fork
-
-```yaml
-steps:
-  - uses: actions/checkout@v2
-  - uses: dalehenrich/setup-superDoit@v2
-    id: superdoit
-    with:
-      gemstone-version: '3.6.1'
-      superDoit-branch: 'testing-branch'
-      superDoit-source: 'myfork/superDoit'
-```
 ## Branch conventions
 1. vX
 2. vX.Y
