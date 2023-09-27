@@ -1,7 +1,7 @@
 #! /usr/bin/env bash
 
 set -e
-#set -x
+set -x
 
 sudo mkdir /opt/gemstone
 sudo chmod oug+rwx /opt/gemstone
