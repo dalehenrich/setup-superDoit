@@ -17,12 +17,12 @@ jobs:
         gemstone: [ 3.7.0, 3.6.6, 3.6.0, 3.5.8 ]
     name: ${{ matrix.gemstone }} ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - id: setup-superDoit
         uses: ./
         with:
           gemstone-version: ${{matrix.gemstone}}
-          superDoit-branch: 'v2'
+          superDoit-branch: 'v4.1'
       - name: validate_superDoit_setup
         run: |
           echo "GemStone version: ${{ steps.setup-superDoit.outputs.gemstone-version }}"
