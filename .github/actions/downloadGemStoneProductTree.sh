@@ -14,8 +14,8 @@ echo "Downloading product tree for $superDoit_gemstone_version ..."
 ${superDoit_root_dir}/dev/downloadGemStone.sh $superDoit_gemstone_version
 
 productName=GemStone64Bit${superDoit_gemstone_version}-${productExtension}
-echo "::set-output name=gemstone-product-name::$productName"
-echo "::set-output name=gemstone-product-path::${superDoit_root_dir}/gemstone/products/${productName}"
+echo "gemstone-product-name=$productName" >> $GITHUB_OUTPUT
+echo "gemstone-product-path=${superDoit_root_dir}/gemstone/products/${productName}" >> $GITHUB_OUTPUT
 if [ "$superDoit_gemstone_version" != "$superDoit_solo_version" ] ; then
 	echo "Downloading solo product tree for $superDoit_solo_version ..."
 	${superDoit_root_dir}/dev/downloadGemStone.sh $superDoit_solo_version
