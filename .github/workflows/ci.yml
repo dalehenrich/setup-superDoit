@@ -14,7 +14,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ ubuntu-20.04, macos-11 ]
-        gemstone: [ 3.7.0, 3.6.6, 3.6.0, 3.5.8 ]
+        gemstone: [ 3.7.0, 3.6.6, 3.6.4 ]
     name: ${{ matrix.gemstone }} ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
@@ -22,7 +22,7 @@ jobs:
         uses: ./
         with:
           gemstone-version: ${{matrix.gemstone}}
-          superDoit-branch: 'v3'
+          superDoit-branch: 'v2'
       - name: validate_superDoit_setup
         run: |
           echo "GemStone version: ${{ steps.setup-superDoit.outputs.gemstone-version }}"
