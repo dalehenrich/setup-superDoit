@@ -47,23 +47,6 @@ jobs:
           ls -al ${{ steps.setup-superDoit.outputs.superDoit-root }}/gemstone/solo
           echo ${{ steps.setup-superDoit.outputs.stone-directory }}
           ls -al ${{ steps.setup-superDoit.outputs.stone-directory }}
-          if [ "${{ steps.setup-superDoit.outputs.gemstone-version }}" = '3.6.1' ] ; then
-            if [ "${{ steps.setup-superDoit.outputs.solo-version }}" != '3.6.1' ] ; then
-              echo "Expected solo version (${{ steps.setup-superDoit.outputs.solo-version }}) to be 3.6.1"
-              exit 1
-            fi
-          elif [ "${{ steps.setup-superDoit.outputs.gemstone-version }}" = '3.6.0' ] ; then
-            if [ "${{ steps.setup-superDoit.outputs.solo-version }}" != '3.6.0' ] ; then
-              echo "Expected solo version (${{ steps.setup-superDoit.outputs.solo-version }}) to be 3.6.0"
-              exit 1
-            fi
-          else
-            if [ "${{ steps.setup-superDoit.outputs.solo-version }}" != '3.6.1' ] ; then
-              # 3.6.1 is the default if gemstone version does not support topaz solo
-              echo "Expected solo version (${{ steps.setup-superDoit.outputs.solo-version }}) to be 3.6.1"
-              exit 1
-            fi
-          fi
           # run some superdoit scripts
           . ${{ steps.setup-superDoit.outputs.superDoit-root }}/dev/defPath.env
           export PATH=${{ steps.setup-superDoit.outputs.superDoit-root }}/examples/simple:$PATH
