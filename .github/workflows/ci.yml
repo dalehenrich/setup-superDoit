@@ -22,7 +22,7 @@ jobs:
         uses: ./
         with:
           gemstone-version: ${{matrix.gemstone}}
-          superDoit-branch: 'v3.1.1'
+          superDoit-branch: 'v4.1'
       - name: validate_superDoit_setup
         run: |
           echo "GemStone version: ${{ steps.setup-superDoit.outputs.gemstone-version }}"
