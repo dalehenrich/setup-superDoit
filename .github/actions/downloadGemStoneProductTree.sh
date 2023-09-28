@@ -24,7 +24,6 @@ case "$PLATFORM" in
      ;;
 esac
 
-productName=GemStone64Bit${superDoit_gemstone_version}-${productExtension}
 echo "gemstone-product-name=$productName" >> $GITHUB_OUTPUT
 echo "gemstone-product-path=${superDoit_root_dir}/gemstone/products/${productName}" >> $GITHUB_OUTPUT
 
