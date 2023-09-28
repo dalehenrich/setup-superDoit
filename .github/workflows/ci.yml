@@ -14,7 +14,8 @@ jobs:
       fail-fast: false
       matrix:
         os: [ ubuntu-20.04, ubuntu-latest, macos-11, macos-latest ]
-        gemstone: [ 3.7.0 ]
+        gemstone: [ 3.7.0, 3.6.6 ]
+        superDoitBranch: [ v3, v3.1 , v4.1 ]
     name: ${{ matrix.gemstone }} ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
