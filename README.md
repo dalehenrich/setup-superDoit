@@ -8,7 +8,7 @@ BRANCH | STATUS
 ### v4.1
 Intended for .solo scripts used with versions of GemStone that are shipped with an extent0.rowan.dbf in $GEMSTONE/bin, GemStone 3.6.4 and newer versions of GemStone (currently tested thru 3.6.5). 
 
-Should be used with superDoit branch v3.1 and later. 
+Should be used with superDoit branch v4.1 and later. 
 
 .stone scripts may be used with GemStone versions as old as 3.4.0.
 
