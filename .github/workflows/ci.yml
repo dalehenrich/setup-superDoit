@@ -13,8 +13,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ ubuntu-20.04, macos-11 ]
-        gemstone: [ 3.7.0, 3.6.6, 3.6.4 ]
+        os: [ ubuntu-20.04, macos-latest ]
+        gemstone: [ 3.7.0 ]
     name: ${{ matrix.gemstone }} ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
