@@ -56,10 +56,10 @@ runs:
       shell: bash
     - id: setup_shared_memory_on_mac
       run: |
-        if [ "$PLATFORM" = "macos-10.15" ] ; then
+        case "$PLATFORM" in macos*)
           echo "-- set up shared memory on Mac"
           ${{ steps.downloadSuperDoitProject.outputs.superDoit-root }}/dev/setSharedMemory.sh
-        fi
+        esac
       shell: bash
     - id: setup_and_start_stone
       run: |
