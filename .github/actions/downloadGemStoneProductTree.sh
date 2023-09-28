@@ -10,13 +10,13 @@ ${superDoit_root_dir}/bin/install.sh $superDoit_gemstone_version
 PLATFORM="`uname -sm | tr ' ' '-'`"
 case "$PLATFORM" in
    Darwin-arm64)
-		productName="GemStone64Bit${gemstoneversion}-arm64.Darwin"
+		productName="GemStone64Bit${superDoit_gemstone_version}-arm64.Darwin"
 		;;
    Darwin-x86_64)
-		productName="GemStone64Bit${gemstoneversion}-i386.Darwin"
+		productName="GemStone64Bit${superDoit_gemstone_version}-i386.Darwin"
 		;;
 	Linux-x86_64)
-		productName="GemStone64Bit${gemstoneversion}-x86_64.Linux"
+		productName="GemStone64Bit${superDoit_gemstone_version}-x86_64.Linux"
      ;;
 	*)
 		echo "This script should only be run on Mac (Darwin-i386 or Darwin-arm64), or Linux (Linux-x86_64) ). The result from \"uname -sm\" is \"`uname -sm`\""
