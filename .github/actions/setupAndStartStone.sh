@@ -8,7 +8,12 @@ sudo chmod oug+rwx /opt/gemstone
 sudo mkdir /opt/gemstone/locks
 sudo chmod oug+rwx /opt/gemstone/locks
 
+echo $PATH
+echo "---"
 . $SUPERDOIT_ROOT/dev/defPath.env
+echo "---"
+echo $PATH
+echo "---"
 
 echo "GEMSTONE=$GEMSTONE"
 ls -l $GEMSTONE/bin
