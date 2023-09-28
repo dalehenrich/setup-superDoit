@@ -8,19 +8,18 @@ sudo chmod oug+rwx /opt/gemstone
 sudo mkdir /opt/gemstone/locks
 sudo chmod oug+rwx /opt/gemstone/locks
 
+echo "PATH---"
 echo $PATH
-echo "---"
+echo "PATH---"
 . $SUPERDOIT_ROOT/dev/defPath.env
-echo "---"
+echo "PATH---"
 echo $PATH
-echo "---"
+echo "PATH---"
 
 echo "GEMSTONE=$GEMSTONE"
 ls -l $GEMSTONE/bin
 echo "=============================================="
 $GEMSTONE/bin/topaz -h
-echo "=============================================="
-topaz -h
 echo "=============================================="
 createSuperDoitStone.solo -D --GEMSTONE=$GEMSTONE --stoneDirectory=$GEMSTONE_STONE_DIR --stoneName=$GEMSTONE_STONE_NAME
 
