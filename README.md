@@ -6,7 +6,7 @@ BRANCH | STATUS
 
 ## Versions
 ### v4
-Intended for .solo scripts used with versions of GemStone that are shipped with an extent0.rowan.dbf in $GEMSTONE/bin, GemStone 3.6.4 and newer versions of GemStone (currently tested thru 3.6.5). 
+Intended for .solo scripts used with versions of GemStone that are shipped with an extent0.rowan.dbf in $GEMSTONE/bin, GemStone 3.6.4 and newer versions of GemStone (currently tested: 3.6.4, 3.6.5, 3.6.6, 3.7.0). 
 
 Should be used with superDoit branch v4 and later. 
 
