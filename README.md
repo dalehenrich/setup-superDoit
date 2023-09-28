@@ -1,14 +1,14 @@
 # setup-superDoit
 BRANCH | STATUS
 ------------- | -------------
-**v4.1** | [![**v4.1** build status](https://github.com/dalehenrich/setup-superDoit/actions/workflows/ci.yml/badge.svg?branch=v4.1)](https://github.com/dalehenrich/setup-superDoit/actions)
+**v4** | [![**v4** build status](https://github.com/dalehenrich/setup-superDoit/actions/workflows/ci.yml/badge.svg?branch=v4)](https://github.com/dalehenrich/setup-superDoit/actions)
 **v2** | [![**v2** build status](https://github.com/dalehenrich/setup-superDoit/actions/workflows/ci.yml/badge.svg?branch=v2)](https://github.com/dalehenrich/setup-superDoit/actions)
 
 ## Versions
-### v4.1
+### v4
 Intended for .solo scripts used with versions of GemStone that are shipped with an extent0.rowan.dbf in $GEMSTONE/bin, GemStone 3.6.4 and newer versions of GemStone (currently tested thru 3.6.5). 
 
-Should be used with superDoit branch v4.1 and later. 
+Should be used with superDoit branch v4 and later. 
 
 .stone scripts may be used with GemStone versions as old as 3.4.0.
 
