@@ -7,6 +7,7 @@ cd ${superDoit_root_dir}/gemstone/products
 echo "Downloading product tree for $superDoit_gemstone_version ..."
 ${superDoit_root_dir}/bin/install.sh $superDoit_gemstone_version
 
+PLATFORM="`uname -sm | tr ' ' '-'`"
 case "$PLATFORM" in
    Darwin-arm64)
 		productName="GemStone64Bit${gemstoneversion}-arm64.Darwin"
