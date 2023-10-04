@@ -56,18 +56,6 @@ jobs:
           simple.solo -h
           simple.solo
           versionReport.solo
-
-          # .stone scripts
-          export GEMSTONE=${{ steps.setup-superDoit.outputs.gemstone-product-path }}
-          export TOPAZINI_PATH=${{steps.setup-superDoit.outputs.topazini-path}}
-
-          echo gslist OUTPUT
-          $GEMSTONE/bin/gslist -lc
-
-          simple.stone -h -- -l -I $TOPAZINI_PATH
-          simple.stone -- -l -I $TOPAZINI_PATH
-
-          simple.topaz -l -I $TOPAZINI_PATH
   slack-workflow-status:
     if: always()
     name: Post Workflow Status To Slack
