@@ -48,3 +48,4 @@ runs:
           echo "-- set up shared memory on Mac"
           ${{ steps.downloadSuperDoitProject.outputs.superDoit-root }}/dev/setSharedMemory.sh
         esac
+      shell: bash
