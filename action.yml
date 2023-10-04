@@ -49,3 +49,10 @@ runs:
           ${{ steps.downloadSuperDoitProject.outputs.superDoit-root }}/dev/setSharedMemory.sh
         esac
       shell: bash
+    - id: setup_opt_dirs
+      run: |
+        sudo mkdir /opt/gemstone
+        sudo chmod oug+rwx /opt/gemstone
+        sudo mkdir /opt/gemstone/locks
+        sudo chmod oug+rwx /opt/gemstone/locks
+      shell: bash
