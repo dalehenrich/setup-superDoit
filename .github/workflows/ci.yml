@@ -56,6 +56,13 @@ jobs:
           simple.solo -h
           simple.solo
           versionReport.solo
+
+          # create directories required by GemStone
+          sudo mkdir /opt/gemstone
+          sudo chmod oug+rwx /opt/gemstone
+          sudo mkdir /opt/gemstone/locks
+          sudo chmod oug+rwx /opt/gemstone/locks
+
   slack-workflow-status:
     if: always()
     name: Post Workflow Status To Slack
