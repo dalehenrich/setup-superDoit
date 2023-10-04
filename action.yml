@@ -22,18 +22,6 @@ outputs:
   gemstone-product-name:
     description: 'name of GemStone product tree directory'
     value: ${{steps.downloadGemStoneProductTree.outputs.gemstone-product-name}}
-  stone-directory:
-    description: 'directory where stone is running'
-    value: ${{steps.setup_and_start_stone.outputs.stone-directory}}
-  topazini-path:
-    description: 'location of the default .topazini file'
-    value: ${{steps.setup_and_start_stone.outputs.topazini-path}}
-  stone-name:
-    description: 'name of the stone'
-    value: ${{steps.setup_and_start_stone.outputs.stone-name}}
-  stone-system-conf-path:
-    description: 'path to sysmtem.conf file'
-    value: ${{steps.setup_and_start_stone.outputs.stone-system-conf-path}}
   superDoit-root:
     description: 'root directory of the downloaded superDoit project'
     value: ${{ steps.downloadSuperDoitProject.outputs.superDoit-root }}
@@ -60,18 +48,3 @@ runs:
           echo "-- set up shared memory on Mac"
           ${{ steps.downloadSuperDoitProject.outputs.superDoit-root }}/dev/setSharedMemory.sh
         esac
-      shell: bash
-    - id: setup_and_start_stone
-      run: |
-        export GEMSTONE=${{ steps.downloadGemStoneProductTree.outputs.gemstone-product-path }}
-        export GEMSTONE_VERSION=${{ steps.downloadSuperDoitProject.outputs.gemstone-version }}
-        export GEMSTONE_STONE_NAME=gs_$GEMSTONE_VERSION
-        echo "stone-name=$GEMSTONE_STONE_NAME" >> $GITHUB_OUTPUT
-        export GEMSTONE_STONE_DIR=${{ steps.downloadSuperDoitProject.outputs.superDoit-root }}/gemstone/stones/$GEMSTONE_STONE_NAME
-        echo "stone-directory=$GEMSTONE_STONE_DIR" >> $GITHUB_OUTPUT
-        echo "topazini-path=$GEMSTONE_STONE_DIR/.topazini" >> $GITHUB_OUTPUT
-        export SUPERDOIT_ROOT=${{ steps.downloadSuperDoitProject.outputs.superDoit-root }}
-        export GEMSTONE_SYSTEM_CONF=$GEMSTONE_STONE_DIR/system.conf
-        echo "stone-system-conf-path=$GEMSTONE_SYSTEM_CONF" >> $GITHUB_OUTPUT
-        ${{ github.action_path }}/.github/actions/setupAndStartStone.sh
-      shell: bash
