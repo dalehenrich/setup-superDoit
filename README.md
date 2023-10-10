@@ -2,15 +2,23 @@
 BRANCH | STATUS
 ------------- | -------------
 **v4** | [![**v4** build status](https://github.com/dalehenrich/setup-superDoit/actions/workflows/ci.yml/badge.svg?branch=v4)](https://github.com/dalehenrich/setup-superDoit/actions)
+**v3** | [![**v3** build status](https://github.com/dalehenrich/setup-superDoit/actions/workflows/ci.yml/badge.svg?branch=v3)](https://github.com/dalehenrich/setup-superDoit/actions)
 **v2** | [![**v2** build status](https://github.com/dalehenrich/setup-superDoit/actions/workflows/ci.yml/badge.svg?branch=v2)](https://github.com/dalehenrich/setup-superDoit/actions)
 
 ## Versions
 ### v4
+Identical to v3 except that a stone is not started. Should be used in github actions for GsDevKit_stones.
+
+v4 and v3 should be kept in sync.
+
+### v3
 Intended for .solo scripts used with versions of GemStone that are shipped with an extent0.rowan.dbf in $GEMSTONE/bin, GemStone 3.6.4 and newer versions of GemStone (currently tested: 3.6.4, 3.6.5, 3.6.6, 3.7.0). 
 
 Should be used with superDoit branch v4 and later. 
 
 .stone scripts may be used with GemStone versions as old as 3.4.0.
+
+Should be used in github actions for superDoit.
 
 ### v2
 Intended for use with older versions of GemStone: 3.6.1, 3.6.0, 3.5.8, 3.5.0 (tested versions)
